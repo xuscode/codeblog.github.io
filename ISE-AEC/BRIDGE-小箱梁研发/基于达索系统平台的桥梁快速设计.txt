@@ -1,0 +1,24 @@
+# 基于达索系统平台的桥梁快速设计
+
+作者：xxx
+
+![](.\assets/1.jpg)
+
+## 1.摘要
+
+## 2.引言
+
+## 3. 技术路线
+
+### 3.1参数化模型
+### 3.2设计数据同步
+## 4.图纸生成
+## 5.项目应用
+![](.\assets/img_1.PNG)
+![](.\assets/img_2.PNG)
+![](.\assets/img_3.PNG)
+![](.\assets/img_4.PNG)
+![](.\assets/img_5.PNG)
+![](.\assets/img_6.PNG)
+![](.\assets/示意图_桥墩类型1.png)
+

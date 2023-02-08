@@ -1,0 +1,3115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>二期项目代码.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E4%BA%8C%E6%9C%9F%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81">二期项目代码</h1>
+<h3 id="%E5%88%9B%E5%BB%BA%E6%A1%A5%E6%A2%81%E5%88%86%E5%AD%94%E7%BA%BF%E5%B9%B6%E4%B8%94%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE%E5%88%B0excel">创建桥梁分孔线并且输出数据到excel</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Text;
+<span class="hljs-keyword">using</span> System.Threading.Tasks;
+<span class="hljs-keyword">using</span> System.Collections;
+<span class="hljs-keyword">using</span> System.IO;
+
+<span class="hljs-keyword">using</span> MECMOD;
+<span class="hljs-keyword">using</span> INFITF;
+<span class="hljs-keyword">using</span> KnowledgewareTypeLib;
+<span class="hljs-keyword">using</span> HybridShapeTypeLib;
+
+<span class="hljs-keyword">using</span> System.Windows;
+
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Interop.CATCIVAxisDataLib.Code</span>
+{
+
+   <span class="hljs-keyword">public</span>  <span class="hljs-keyword">class</span> <span class="hljs-title">CreatAxisFormExcel</span>:<span class="hljs-title">MainWindow</span>
+    {
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">creatAxisAlongCurve</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> installtype, INFITF.AnyObject planerCurve, INFITF.AnyObject Curve3d, INFITF.AnyObject StartPoint</span>)</span>
+        {
+            ArrayList dislist = <span class="hljs-keyword">new</span> ArrayList();
+            ArrayList namelist = <span class="hljs-keyword">new</span> ArrayList();
+            ArrayList ispierlist = <span class="hljs-keyword">new</span> ArrayList();
+            ArrayList anglelist = <span class="hljs-keyword">new</span> ArrayList();
+            excel xle = <span class="hljs-keyword">new</span> excel();
+            dislist=xle.Open(<span class="hljs-keyword">out</span> namelist,<span class="hljs-keyword">out</span> ispierlist,<span class="hljs-keyword">out</span> anglelist);
+
+            <span class="hljs-comment">//for (int i = 1; i &lt; dislist.Count; i++)</span>
+            <span class="hljs-comment">//{</span>
+            <span class="hljs-comment">//    MessageBox.Show(dislist[i].ToString());</span>
+            <span class="hljs-comment">//}</span>
+
+            Part part = GetContainPart(planerCurve);
+            HybridShapeFactory hsf = (HybridShapeFactory)part.HybridShapeFactory;
+
+            HybridBody AXISHB = part.HybridBodies.Add(); AXISHB.set_Name(<span class="hljs-string">"PIER_AXIS_SET"</span>);
+
+            HybridBody hbpts = AXISHB.HybridBodies.Add(); hbpts.set_Name(<span class="hljs-string">"AXIS_PTS"</span>);
+            HybridBody hbref = AXISHB.HybridBodies.Add(); hbref.set_Name(<span class="hljs-string">"AXIS_REF"</span>);
+            HybridBody hb = AXISHB.HybridBodies.Add(); hb.set_Name(<span class="hljs-string">"AXIS_RESULT"</span>);
+
+            ListParameter axislist = part.Parameters.CreateList(<span class="hljs-string">"AXISLIST"</span>);
+
+            <span class="hljs-comment">//MessageBox.Show("距离数量："+dislist.Count);</span>
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; dislist.Count; i++)
+            {
+
+                <span class="hljs-keyword">double</span> dislens = Convert.ToDouble(dislist[i]) * <span class="hljs-number">1000</span>;
+
+                <span class="hljs-keyword">double</span> RoatateAngle = Convert.ToDouble(anglelist[i]);
+
+                part.InWorkObject = hb;
+
+                HybridShapeProject proj;
+
+                <span class="hljs-keyword">if</span> (installtype == <span class="hljs-number">1</span>)
+                {
+                   
+                    HybridShape pts = hsf.AddNewPointOnCurveWithReferenceFromDistance((Reference)planerCurve, (Reference)StartPoint, dislens, <span class="hljs-literal">false</span>);
+                    StartPoint = pts;
+                    pts.set_Name(namelist[i].ToString());
+
+                    hbpts.AppendHybridShape(pts);
+                    <span class="hljs-comment">// HybridShape pts = hsf.AddNewPointOnCurveFromDistance((Reference)crv, aa, false); pts.Compute();</span>
+                    proj = hsf.AddNewProject((Reference)pts, (Reference)Curve3d); proj.Compute();
+
+                    proj.SolutionType = <span class="hljs-number">0</span>;
+                    proj.Normal = <span class="hljs-literal">false</span>;
+                    proj.SmoothingType = <span class="hljs-number">0</span>;
+                    proj.ExtrapolationMode = <span class="hljs-number">0</span>;
+                    proj.Direction = hsf.AddNewDirectionByCoord(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+                    proj.set_Name( namelist[i].ToString());
+                    hbref.AppendHybridShape(proj);
+                    proj.Compute();
+
+                    AxisSystem pieraxis = Axis(part, (HybridShape)Curve3d, (HybridShape)proj, hb, RoatateAngle);
+                    Parameters parms = part.Parameters.SubList(pieraxis, <span class="hljs-literal">true</span>);
+                    Parameter distag = parms.CreateInteger(<span class="hljs-string">"IsPier"</span>,Convert.ToInt32(ispierlist[i]));
+                    Parameter angletag = parms.CreateDimension(<span class="hljs-string">"AxisAngle"</span>,<span class="hljs-string">"ANGLE"</span>, Convert.ToInt32(anglelist[i]));
+
+                }
+                <span class="hljs-keyword">else</span>
+                {
+                    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>)
+                    {
+                        
+                        HybridShape pts = hsf.AddNewPointOnCurveWithReferenceFromDistance((Reference)planerCurve, (Reference)StartPoint, dislens, <span class="hljs-literal">false</span>);
+                        StartPoint = pts;
+                        <span class="hljs-comment">// HybridShape pts = hsf.AddNewPointOnCurveFromDistance((Reference)crv, aa, false); pts.Compute();</span>
+                        proj = hsf.AddNewProject((Reference)pts, (Reference)Curve3d); proj.Compute();
+
+                        proj.SolutionType = <span class="hljs-number">0</span>;
+                        proj.Normal = <span class="hljs-literal">false</span>;
+                        proj.SmoothingType = <span class="hljs-number">0</span>;
+                        proj.ExtrapolationMode = <span class="hljs-number">0</span>;
+                        proj.Direction = hsf.AddNewDirectionByCoord(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+                        proj.set_Name( namelist[i].ToString());
+                        hbref.AppendHybridShape(proj);
+                        proj.Compute();
+
+                        AxisSystem pieraxis = Axis(part, (HybridShape)Curve3d, (HybridShape)proj, hb, RoatateAngle);
+                        Parameters parms = part.Parameters.SubList(pieraxis, <span class="hljs-literal">true</span>);
+                        Parameter distag = parms.CreateInteger(<span class="hljs-string">"IsPier"</span>, Convert.ToInt32(ispierlist[i]));
+                        Parameter angletag = parms.CreateInteger(<span class="hljs-string">"AxisAngle"</span>, Convert.ToInt32(anglelist[i]));
+                    }
+                    <span class="hljs-keyword">else</span>
+                    {
+                        HybridShapeLineTangency tar1 = hsf.AddNewLineTangency((Reference)planerCurve, (Reference)StartPoint, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">false</span>);
+                        tar1.Compute();
+                        HybridShapeSphere sph1 = hsf.AddNewSphere((Reference)StartPoint, <span class="hljs-literal">null</span>, dislens, <span class="hljs-number">-45</span>, <span class="hljs-number">45</span>, <span class="hljs-number">0</span>, <span class="hljs-number">180</span>);
+                        sph1.Limitation = <span class="hljs-number">1</span>;
+                        sph1.Compute();
+
+                        HybridShapeIntersection intt1 = hsf.AddNewIntersection((Reference)sph1, (Reference)planerCurve);
+                        intt1.PointType = <span class="hljs-number">0</span>;
+                        intt1.Compute();
+                        HybridShapeNear near1 = hsf.AddNewNear((Reference)intt1, (Reference)tar1);
+                        StartPoint = near1;
+                        near1.Compute();
+
+
+                        <span class="hljs-comment">//hbref.AppendHybridShape(near1);</span>
+
+                        proj = hsf.AddNewProject((Reference)near1, (Reference)Curve3d); proj.Compute();
+
+                        proj.SolutionType = <span class="hljs-number">0</span>;
+                        proj.Normal = <span class="hljs-literal">false</span>;
+                        proj.SmoothingType = <span class="hljs-number">0</span>;
+                        proj.ExtrapolationMode = <span class="hljs-number">0</span>;
+                        proj.Direction = hsf.AddNewDirectionByCoord(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+                        proj.set_Name(namelist[i].ToString());
+                        hbref.AppendHybridShape(proj);
+                        proj.Compute();                   
+                        proj.set_Name(namelist[i].ToString());
+
+                        AxisSystem pieraxis = Axis(part, (HybridShape)Curve3d, (HybridShape)proj, hb, RoatateAngle);
+                        Parameters parms = part.Parameters.SubList(pieraxis, <span class="hljs-literal">true</span>);
+                        Parameter distag = parms.CreateInteger(<span class="hljs-string">"IsPier"</span>, Convert.ToInt32(ispierlist[i]));
+                        Parameter angletag = parms.CreateInteger(<span class="hljs-string">"AxisAngle"</span>, Convert.ToInt32(anglelist[i]));
+
+                       
+                    }
+                   
+                }
+               
+
+
+                part.InWorkObject = hb;
+                <span class="hljs-comment">//xle = null;</span>
+
+               
+
+            }
+
+            <span class="hljs-comment">//释放资源</span>
+            xle = <span class="hljs-literal">null</span>;
+
+        }
+
+       
+
+        <span class="hljs-function"><span class="hljs-keyword">static</span> AxisSystem <span class="hljs-title">Axis</span>(<span class="hljs-params">Part part, HybridShape crv, HybridShape pt, HybridBody hb, <span class="hljs-keyword">double</span> rotateAngle</span>)</span>
+        {
+            HybridShapeFactory hsf = (HybridShapeFactory)part.HybridShapeFactory;
+            HybridShapeDirection zdir = hsf.AddNewDirection((Reference)part.OriginElements.PlaneXY);
+            HybridShape zln = hsf.AddNewLinePtDir((INFITF.Reference)pt, zdir, <span class="hljs-number">-100</span>, <span class="hljs-number">500</span>, <span class="hljs-literal">false</span>); zln.Compute();
+            HybridShape pln = hsf.AddNewPlaneOffsetPt((Reference)part.OriginElements.PlaneXY, (Reference)pt); pln.Compute();
+            HybridShapeLineTangency tarln = hsf.AddNewLineTangency((Reference)crv, (Reference)pt, <span class="hljs-number">-100</span>, <span class="hljs-number">300</span>, <span class="hljs-literal">false</span>); tarln.Compute();
+            HybridShapeProject xdirln = hsf.AddNewProject((Reference)tarln, (Reference)pln); xdirln.Compute();
+            xdirln.SolutionType = <span class="hljs-number">0</span>;
+            xdirln.Normal = <span class="hljs-literal">false</span>;
+            xdirln.SmoothingType = <span class="hljs-number">0</span>;
+            xdirln.Direction = zdir;
+            xdirln.ExtrapolationMode = <span class="hljs-number">0</span>;
+
+            Reference reference1 = part.CreateReferenceFromObject(xdirln);
+            HybridShapeRotate hybridShapeRotate1 = hsf.AddNewEmptyRotate();
+            hybridShapeRotate1.ElemToRotate = reference1;
+            hybridShapeRotate1.VolumeResult = <span class="hljs-literal">false</span>;
+            hybridShapeRotate1.RotationType = <span class="hljs-number">0</span>;
+            hybridShapeRotate1.Compute();
+            hybridShapeRotate1.Axis = (Reference)zln;
+            hybridShapeRotate1.AngleValue = rotateAngle;
+            hybridShapeRotate1.set_Name(<span class="hljs-string">"Roatate_ln_"</span>+ Convert.ToString( rotateAngle));
+            hybridShapeRotate1.Compute();
+
+            AxisSystem axis = part.AxisSystems.Add();
+            axis.OriginType = CATAxisSystemOriginType.catAxisSystemOriginByPoint;
+            axis.OriginPoint = (Reference)pt;
+
+            axis.XAxisType = CATAxisSystemAxisType.catAxisSystemAxisSameDirection;
+            axis.XAxisDirection = (Reference)hybridShapeRotate1;
+
+            axis.YAxisType = CATAxisSystemAxisType.catAxisSystemAxisOppositeDirection;
+
+            axis.ZAxisType = CATAxisSystemAxisType.catAxisSystemAxisSameDirection;
+            axis.ZAxisDirection = (Reference)zln;
+            part.UpdateObject(axis);
+            axis.IsCurrent = <span class="hljs-literal">true</span>;
+
+            axis.set_Name(pt.get_Name());
+            part.UpdateObject(axis);
+
+           
+            <span class="hljs-keyword">return</span> axis;
+        }
+
+
+
+
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> MECMOD.<span class="hljs-function">Part <span class="hljs-title">GetContainPart</span>(<span class="hljs-params">INFITF.AnyObject obj</span>)</span>
+        {
+
+            INFITF.AnyObject a = (INFITF.AnyObject)obj;
+            INFITF.AnyObject current = a;
+            <span class="hljs-keyword">bool</span> found = <span class="hljs-literal">false</span>;
+            <span class="hljs-keyword">while</span> (found == <span class="hljs-literal">false</span>)
+            {
+                current = (INFITF.AnyObject)current.Parent;
+                <span class="hljs-comment">//Console.WriteLine("aaa___!" + Microsoft.VisualBasic. Information.TypeName(current));</span>
+
+                <span class="hljs-keyword">if</span> (Microsoft.VisualBasic.Information.TypeName(current) == <span class="hljs-string">"Part"</span>)
+                {
+                    found = <span class="hljs-literal">true</span>;
+                    <span class="hljs-comment">// break;</span>
+                }
+            }
+            <span class="hljs-keyword">return</span> (MECMOD.Part)current;
+        }
+
+        <span class="hljs-keyword">class</span> <span class="hljs-title">excel</span>
+        {
+            ArrayList dislist = <span class="hljs-keyword">new</span> ArrayList();
+
+            <span class="hljs-comment">// public string Filename;</span>
+
+            <span class="hljs-function"><span class="hljs-keyword">public</span> ArrayList  <span class="hljs-title">Open</span>(<span class="hljs-params"><span class="hljs-keyword">out</span> ArrayList namelist, <span class="hljs-keyword">out</span> ArrayList IsPierParm,<span class="hljs-keyword">out</span> ArrayList angleList</span>)<span class="hljs-comment">//打开一个Microsoft.Office.Interop.Excel文件</span></span>
+            {
+        
+
+                dislist.Clear();
+
+                namelist = <span class="hljs-keyword">new</span> ArrayList();
+                namelist.Clear();
+
+                IsPierParm = <span class="hljs-keyword">new</span> ArrayList();
+                IsPierParm.Clear();
+
+                angleList = <span class="hljs-keyword">new</span> ArrayList();
+                angleList.Clear();
+
+                <span class="hljs-keyword">int</span> icount = <span class="hljs-number">1000</span>;
+
+                <span class="hljs-keyword">int</span> colnum = <span class="hljs-number">3</span>;
+                <span class="hljs-keyword">int</span> names = <span class="hljs-number">5</span>;
+                <span class="hljs-keyword">int</span> ispier = <span class="hljs-number">24</span>;
+                <span class="hljs-keyword">int</span> angleIndex = <span class="hljs-number">21</span>;
+
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; icount; i++)
+                {
+                    
+                    <span class="hljs-keyword">if</span> (xlsheet.Cells[i + <span class="hljs-number">6</span>, colnum].Value !=<span class="hljs-literal">null</span>)
+                    {
+                        <span class="hljs-keyword">if</span> (xlsheet.Cells[i + <span class="hljs-number">6</span>, names].Value != <span class="hljs-literal">null</span>)
+                        {
+                            <span class="hljs-keyword">if</span> (xlsheet.Cells[i + <span class="hljs-number">6</span>, ispier].Value != <span class="hljs-literal">null</span>)
+                            {
+                                dislist.Add(xlsheet.Cells[i + <span class="hljs-number">6</span>, colnum].Value);
+                                namelist.Add(xlsheet.Cells[i + <span class="hljs-number">6</span>, names].Value);
+                                IsPierParm.Add(xlsheet.Cells[i + <span class="hljs-number">6</span>, ispier].Value);
+                                angleList.Add(xlsheet.Cells[i + <span class="hljs-number">6</span>, angleIndex].Value);
+                            }
+                        }
+                    }
+                }
+                <span class="hljs-keyword">return</span> dislist;
+            }
+        }
+
+
+        <span class="hljs-keyword">class</span> <span class="hljs-title">attribure</span>
+        {
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetAttributeBooleanToObject</span>(<span class="hljs-params">MECMOD.Part part, HybridShape obj,<span class="hljs-keyword">string</span> name,Boolean <span class="hljs-keyword">value</span></span>)</span>
+            {
+                Parameters parms = part.Parameters.SubList(obj,<span class="hljs-literal">true</span>);
+                Parameter distag = parms.CreateBoolean(name,<span class="hljs-keyword">value</span>);
+            }
+
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">GetAttributeBooleanToObject</span>(<span class="hljs-params">MECMOD.Part part, HybridShape obj, <span class="hljs-keyword">string</span> name, Boolean <span class="hljs-keyword">value</span></span>)</span>
+            {
+                Parameters parms = part.Parameters.SubList(obj, <span class="hljs-literal">true</span>);
+                Parameter distag = parms.CreateBoolean(name, <span class="hljs-keyword">value</span>);
+            }
+
+        }
+    }
+}
+
+
+</div></code></pre>
+<h2 id="%E8%BF%9E%E7%BB%AD%E6%A2%81%E6%95%B4%E4%BD%93%E5%88%9B%E5%BB%BA">连续梁整体创建</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">//BeamProduct:ProductOccurrence,PierProduct:ProductOccurrence,AXIS_LIST:list,ROAD_CENTER:Curve,ROAD_PLANER:Curve</span>
+
+<span class="hljs-comment">/* Action created by 86156 2019/6/5 */</span>
+
+<span class="hljs-function">let <span class="hljs-title">i</span><span class="hljs-params">(integer)</span>
+let F1,<span class="hljs-title">F2</span><span class="hljs-params">(DocumentTemplate)</span>
+
+let destination1,<span class="hljs-title">destination2</span><span class="hljs-params">(ProductOccurrence)</span>
+destination1</span>=BeamProduct
+destination2=<span class="hljs-function">PierProduct
+
+let <span class="hljs-title">axisList</span><span class="hljs-params">(list)</span>
+axisList</span>=<span class="hljs-function">AXIS_LIST
+
+let <span class="hljs-title">xlsheet</span><span class="hljs-params">(DTSheetType)</span>
+let <span class="hljs-title">xls</span><span class="hljs-params">(string)</span>
+xls</span>=EXCEL
+set xlsheet=CreateSheet(xls)
+<span class="hljs-function">let <span class="hljs-title">nb</span> <span class="hljs-params">(Integer)</span>
+nb </span>= xlsheet.<span class="hljs-function">RowsNb
+<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"个数:"</span>,nb)</span>	
+let resName,<span class="hljs-title">resExcel</span><span class="hljs-params">(string)</span>
+
+<span class="hljs-comment">//声明全局变量</span>
+let <span class="hljs-title">L1length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">R1length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">L2length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">R2length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">PierHeight</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">BeamCount</span><span class="hljs-params">(integer)</span>
+let <span class="hljs-title">GapStr</span><span class="hljs-params">(string)</span>
+let <span class="hljs-title">DirStr</span><span class="hljs-params">(string)</span>
+
+<span class="hljs-comment">// *****************************</span>
+<span class="hljs-comment">// ProgressBar creation</span>
+<span class="hljs-comment">// *****************************</span>
+<span class="hljs-title">CreateProgressBar</span><span class="hljs-params">(<span class="hljs-string">"ProgressBar Name"</span>)</span>
+
+i</span>=START
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i &lt;=END <span class="hljs-comment">//axisList.Size ()</span>
+{
+	ProgressBarSetValue(<span class="hljs-number">100</span>*i/axisList.Size())
+	ProgressBarSetText(<span class="hljs-string">" ：已完成 共"</span> + floor(END ))
+	<span class="hljs-comment">//数据处理</span>
+	
+	<span class="hljs-comment">//获得梁数</span>
+	set BeamCount= xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">32</span>)
+	Notify(<span class="hljs-string">"梁数量："</span>,BeamCount)
+	<span class="hljs-keyword">if</span> (i&gt;<span class="hljs-number">1</span>)
+	{
+		<span class="hljs-comment">//获得小里程左侧宽度</span>
+		L1length=xlsheet-&gt;CellAsReal((<span class="hljs-number">5</span>+(i-<span class="hljs-number">1</span>)),<span class="hljs-number">22</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"小里程左侧宽度:"</span>,L1length)</span>	
+		
+		<span class="hljs-comment">//获得小里程右侧宽度	</span>
+		R1length</span>=xlsheet-&gt;CellAsReal((<span class="hljs-number">5</span>+(i-<span class="hljs-number">1</span>)),<span class="hljs-number">23</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"小里程右侧宽度"</span>,R1length)</span>
+		
+		<span class="hljs-comment">//获得大里程左侧宽度</span>
+		L2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">24</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程左侧宽度:"</span>,L2length)</span>	
+		
+		<span class="hljs-comment">//获得大里程右侧宽度</span>
+		R2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">25</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程右侧宽度:"</span>,R2length)</span>
+		
+		<span class="hljs-comment">//获得边跨</span>
+		GapStr</span>=xlsheet-&gt;CellAsString((<span class="hljs-number">5</span>+(i-<span class="hljs-number">1</span>)),<span class="hljs-number">33</span>)
+		Notify(<span class="hljs-string">"获得边跨:"</span>,GapStr)
+		
+		<span class="hljs-comment">//获得位置设定</span>
+		DirStr=xlsheet-&gt;CellAsString((<span class="hljs-number">5</span>+(i-<span class="hljs-number">1</span>)),<span class="hljs-number">34</span>)
+		Notify(<span class="hljs-string">"位置设定:"</span>,DirStr)
+		
+		
+		<span class="hljs-comment">//实例化上部桥梁</span>
+		F1=InstantiateTemplate(<span class="hljs-string">"Re1"</span>,destination1.Instance)
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"P1"</span>,axisList.GetItem (i-<span class="hljs-number">1</span>))
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"P2"</span>,axisList.GetItem (i))
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"ROAD_CENTER"</span>,ROAD_CENTER )
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"ROAD_PLANER"</span>,ROAD_PLANER)
+		
+		<span class="hljs-comment">//修正数据</span>
+		
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P1_LW"</span>,L1length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P1_RW"</span>,R1length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P2_LW"</span>,L2length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P2_RW"</span>,R2length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeInteger(<span class="hljs-string">"BEAM_COUNT"</span>,BeamCount)
+		<span class="hljs-comment">//F1-&gt;SetAttributeString("GapCheck",GapStr)</span>
+		F1-&gt;SetAttributeString(<span class="hljs-string">"DirCheck"</span>,DirStr)
+		
+		<span class="hljs-comment">//F1-&gt;SetAttributeString("跨号" , "跨号-"+ToString(i) )</span>
+		EndModifyTemplate(F1)
+		
+	}
+	<span class="hljs-keyword">if</span> (i&gt;<span class="hljs-number">0</span>)
+	{
+		<span class="hljs-comment">//获得桥墩高度</span>
+		PierHeight=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">27</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"PierHeight:"</span>,PierHeight)</span>
+		
+		<span class="hljs-comment">//获得大里程左侧宽度</span>
+		L2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">22</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程左侧宽度:"</span>,L2length)</span>	
+		
+		<span class="hljs-comment">//获得大里程右侧宽度</span>
+		R2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">23</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程右侧宽度:"</span>,R2length)</span>
+		
+		resExcel</span>=xlsheet-&gt;CellAsString(<span class="hljs-number">5</span>+ i,<span class="hljs-number">31</span>)
+		<span class="hljs-keyword">if</span> resExcel==<span class="hljs-string">"连续梁桥-桥台"</span>
+		{
+			resName=<span class="hljs-string">"Res3"</span>	
+		}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>   resExcel==<span class="hljs-string">"连续梁桥-门架"</span>
+		{
+			resName=<span class="hljs-string">"Res2"</span>		
+		}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> resExcel==<span class="hljs-string">"连续梁桥-悬臂盖梁墩"</span>
+		{
+			resName=<span class="hljs-string">"Res1"</span>	
+		}
+		Notify(<span class="hljs-string">"下部结构资源名称为："</span>,resName)
+		
+		<span class="hljs-comment">//实例化下部桥墩</span>
+		F2=InstantiateTemplate(resName,destination2.Instance)
+		F2-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,axisList.GetItem (i))
+		<span class="hljs-comment">//修正数据</span>
+		F2-&gt;SetAttributeDimension(<span class="hljs-string">"PIER_HEIGHT"</span>,PierHeight,<span class="hljs-string">"LENGTH"</span>)
+		F2-&gt;SetAttributeDimension(<span class="hljs-string">"WIDTH_L"</span>,L2length-<span class="hljs-number">824</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		F2-&gt;SetAttributeDimension(<span class="hljs-string">"WIDTH_R"</span>,R2length-<span class="hljs-number">824</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		
+		<span class="hljs-comment">//F2-&gt;SetAttributeString("跨号" , "跨号-"+ToString(i) )</span>
+		EndModifyTemplate(F2)
+				
+	}
+}
+
+</div></code></pre>
+<h2 id="%E7%AE%80%E6%94%AF%E6%A2%81%E6%95%B4%E4%BD%93%E5%88%9B%E5%BB%BA">简支梁整体创建</h2>
+<pre class="hljs"><code><div><span class="hljs-comment">//BeamProduct:ProductOccurrence,PierProduct:ProductOccurrence,AXIS_LIST:list,ROAD_CENTER:Curve,ROAD_PLANER:Curve</span>
+
+<span class="hljs-comment">/* Action created by 86156 2019/6/5 */</span>
+
+<span class="hljs-function">let <span class="hljs-title">i</span><span class="hljs-params">(integer)</span>
+let F1,<span class="hljs-title">F2</span><span class="hljs-params">(DocumentTemplate)</span>
+
+let destination1,<span class="hljs-title">destination2</span><span class="hljs-params">(ProductOccurrence)</span>
+destination1</span>=BeamProduct
+destination2=<span class="hljs-function">PierProduct
+
+let <span class="hljs-title">axisList</span><span class="hljs-params">(list)</span>
+axisList</span>=<span class="hljs-function">AXIS_LIST
+
+let <span class="hljs-title">xlsheet</span><span class="hljs-params">(DTSheetType)</span>
+let <span class="hljs-title">xls</span><span class="hljs-params">(string)</span>
+xls</span>=EXCEL
+set xlsheet=CreateSheet(xls)
+<span class="hljs-function">let <span class="hljs-title">nb</span> <span class="hljs-params">(Integer)</span>
+nb </span>= xlsheet.<span class="hljs-function">RowsNb
+<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"个数:"</span>,nb)</span>	
+let resExcel,<span class="hljs-title">resName</span><span class="hljs-params">(String)</span>
+
+<span class="hljs-comment">//声明全局变量</span>
+let <span class="hljs-title">L1length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">R1length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">L2length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">R2length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">PierHeight</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">BeamCount</span><span class="hljs-params">(integer)</span>
+let <span class="hljs-title">GapStr</span><span class="hljs-params">(string)</span>
+let <span class="hljs-title">DirStr</span><span class="hljs-params">(string)</span>
+
+<span class="hljs-comment">// *****************************</span>
+<span class="hljs-comment">// ProgressBar creation</span>
+<span class="hljs-comment">// *****************************</span>
+<span class="hljs-title">CreateProgressBar</span><span class="hljs-params">(<span class="hljs-string">"ProgressBar Name"</span>)</span>
+
+i</span>=START
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i &lt;= END  <span class="hljs-comment">//axisList.Size ()</span>
+{
+	ProgressBarSetValue(<span class="hljs-number">100</span>*i/axisList.Size())
+	ProgressBarSetText(<span class="hljs-string">" ：已完成 共"</span> + floor(axisList.Size()))
+	<span class="hljs-comment">//数据处理</span>
+	
+	<span class="hljs-comment">//获得梁数</span>
+	set BeamCount= xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">32</span>)
+	Notify(<span class="hljs-string">"梁数量："</span>,BeamCount)
+	
+	<span class="hljs-keyword">if</span> (i&gt;<span class="hljs-number">1</span>)
+	{
+		<span class="hljs-comment">//获得小里程左侧宽度</span>
+		L1length=xlsheet-&gt;CellAsReal((<span class="hljs-number">5</span>+(i-<span class="hljs-number">1</span>)),<span class="hljs-number">24</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"小里程左侧宽度:"</span>,L1length)</span>	
+		
+		<span class="hljs-comment">//获得小里程右侧宽度	</span>
+		R1length</span>=xlsheet-&gt;CellAsReal((<span class="hljs-number">5</span>+(i-<span class="hljs-number">1</span>)),<span class="hljs-number">25</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"小里程右侧宽度"</span>,R1length)</span>
+		
+		<span class="hljs-comment">//获得大里程左侧宽度</span>
+		L2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">24</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程左侧宽度:"</span>,L2length)</span>	
+		
+		<span class="hljs-comment">//获得大里程右侧宽度</span>
+		R2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">25</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程右侧宽度:"</span>,R2length)</span>
+		
+		<span class="hljs-comment">//获得边跨</span>
+		GapStr</span>=xlsheet-&gt;CellAsString((<span class="hljs-number">5</span>+(i-<span class="hljs-number">1</span>)),<span class="hljs-number">33</span>)
+		Notify(<span class="hljs-string">"获得边跨:"</span>,GapStr)
+		
+		<span class="hljs-comment">//获得位置设定</span>
+		DirStr=xlsheet-&gt;CellAsString((<span class="hljs-number">5</span>+(i-<span class="hljs-number">1</span>)),<span class="hljs-number">34</span>)
+		Notify(<span class="hljs-string">"位置设定:"</span>,DirStr)
+		
+		
+		<span class="hljs-comment">//实例化上部桥梁</span>
+		F1=InstantiateTemplate(<span class="hljs-string">"Re2"</span>,destination1.Instance)
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"P1"</span>,axisList.GetItem (i-<span class="hljs-number">1</span>))
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"P2"</span>,axisList.GetItem (i))
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"ROAD_CENTER"</span>,ROAD_CENTER )
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"ROAD_PLANER"</span>,ROAD_PLANER)
+		
+		<span class="hljs-comment">//修正数据</span>
+		
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P1_LW"</span>,L1length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P1_RW"</span>,R1length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P2_LW"</span>,L2length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P2_RW"</span>,R2length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeInteger(<span class="hljs-string">"BEAM_COUNT"</span>,BeamCount)
+		<span class="hljs-comment">//F1-&gt;SetAttributeString("GapCheck",GapStr)</span>
+		<span class="hljs-comment">//F1-&gt;SetAttributeString("DirCheck",DirStr)</span>
+		
+		<span class="hljs-comment">//F1-&gt;SetAttributeString("跨号" , "跨号-"+ToString(i) )</span>
+		EndModifyTemplate(F1)
+		
+	}
+		<span class="hljs-comment">//获得桥墩高度</span>
+		PierHeight=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">27</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"PierHeight:"</span>,PierHeight)</span>
+		
+		<span class="hljs-comment">//获得大里程左侧宽度</span>
+		L2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">24</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程左侧宽度:"</span>,L2length)</span>	
+		
+		<span class="hljs-comment">//获得大里程右侧宽度</span>
+		R2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">25</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程右侧宽度:"</span>,R2length)</span>
+		
+		
+	resExcel</span>=xlsheet-&gt;CellAsString(<span class="hljs-number">5</span>+i,<span class="hljs-number">31</span>)
+	<span class="hljs-keyword">if</span> resExcel==<span class="hljs-string">"简支梁桥-桥台"</span>
+	{
+		resName=<span class="hljs-string">"Res3"</span>
+	}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>   resExcel==<span class="hljs-string">"简支梁桥-门架"</span>
+	{
+		resName=<span class="hljs-string">"ResB"</span>		
+	}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> resExcel==<span class="hljs-string">"简支梁桥-悬臂盖梁墩"</span>
+	{
+		resName=<span class="hljs-string">"ResA"</span>
+	}
+	Notify(<span class="hljs-string">"下部结构资源名称为："</span>,resName)
+	
+	F2=InstantiateTemplate(resName,destination2.Instance)
+	F2-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,axisList.GetItem(i))
+	F2-&gt;SetAttributeDimension(<span class="hljs-string">"PIER_HEIGHT"</span>,PierHeight,<span class="hljs-string">"LENGTH"</span>)
+	F2-&gt;SetAttributeDimension(<span class="hljs-string">"WIDTH_L"</span>,L2length,<span class="hljs-string">"LENGTH"</span>)
+	F2-&gt;SetAttributeDimension(<span class="hljs-string">"WIDTH_R"</span>,R2length,<span class="hljs-string">"LENGTH"</span>)
+	
+	<span class="hljs-comment">//F2-&gt;SetAttributeString("跨号" , "跨号-"+ToString(i) )</span>
+	EndModifyTemplate(F2)		
+}
+</div></code></pre>
+<h2 id="%E6%A1%A5%E6%A2%81%E7%9A%84%E5%88%9B%E5%BB%BA">桥梁的创建</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">//BeamProduct:ProductOccurrence,PierProduct:ProductOccurrence,AXIS_LIST:list,ROAD_CENTER:Curve,ROAD_PLANER:Curve</span>
+
+<span class="hljs-comment">/* Action created by 86156 2019/6/5 */</span>
+
+<span class="hljs-function">let <span class="hljs-title">i</span><span class="hljs-params">(integer)</span>
+let F1,<span class="hljs-title">F2</span><span class="hljs-params">(DocumentTemplate)</span>
+
+let destination1,<span class="hljs-title">destination2</span><span class="hljs-params">(ProductOccurrence)</span>
+<span class="hljs-comment">//destination1=BeamProduct</span>
+destination2</span>=<span class="hljs-function">PierProduct
+
+let <span class="hljs-title">axisList</span><span class="hljs-params">(list)</span>
+axisList</span>=<span class="hljs-function">AXIS_LIST
+
+let <span class="hljs-title">xlsheet</span><span class="hljs-params">(DTSheetType)</span>
+let <span class="hljs-title">xls</span><span class="hljs-params">(string)</span>
+xls</span>=<span class="hljs-string">"Y:\SHARE\版本2\0827测试数据\连续梁_总体设计表.xlsx"</span>
+set xlsheet=CreateSheet(xls)
+<span class="hljs-function">let <span class="hljs-title">nb</span> <span class="hljs-params">(Integer)</span>
+nb </span>= xlsheet.<span class="hljs-function">RowsNb
+<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"个数:"</span>,nb)</span>	
+
+<span class="hljs-comment">//声明全局变量</span>
+let <span class="hljs-title">L1length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">R1length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">L2length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">R2length</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">PierHeight</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">PileHeight</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">BeamCount</span><span class="hljs-params">(integer)</span>
+let <span class="hljs-title">GapStr</span><span class="hljs-params">(string)</span>
+let <span class="hljs-title">DirStr</span><span class="hljs-params">(string)</span>
+
+<span class="hljs-comment">// *****************************</span>
+<span class="hljs-comment">// ProgressBar creation</span>
+<span class="hljs-comment">// *****************************</span>
+<span class="hljs-title">CreateProgressBar</span><span class="hljs-params">(<span class="hljs-string">"ProgressBar Name"</span>)</span>
+
+i</span>=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i &lt;=axisList.Size ()
+{
+	ProgressBarSetValue(<span class="hljs-number">100</span>*i/axisList.Size())
+	ProgressBarSetText(<span class="hljs-string">" ：已完成 共"</span> + floor(axisList.Size()))
+	<span class="hljs-comment">//数据处理</span>
+	
+	<span class="hljs-comment">//获得梁数</span>
+	set BeamCount= xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">32</span>)
+	Notify(<span class="hljs-string">"梁数量："</span>,BeamCount)
+	
+	<span class="hljs-comment">//获得桥墩高度</span>
+		PierHeight=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">27</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"PierHeight:"</span>,PierHeight)</span>
+		
+		<span class="hljs-comment">//获得大里程左侧宽度</span>
+		L2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">24</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程左侧宽度:"</span>,L2length)</span>	
+		
+		<span class="hljs-comment">//获得大里程右侧宽度</span>
+		R2length</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">25</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"大里程右侧宽度:"</span>,R2length)</span>
+		
+		<span class="hljs-comment">//桩长</span>
+		PileHeight</span>=xlsheet-&gt;CellAsReal(<span class="hljs-number">5</span>+i,<span class="hljs-number">40</span>)*<span class="hljs-number">1</span><span class="hljs-function">m
+		<span class="hljs-title">Notify</span><span class="hljs-params">(<span class="hljs-string">"桩长:"</span>,PileHeight)</span>
+		
+	<span class="hljs-title">if</span> <span class="hljs-params">(i==<span class="hljs-number">1</span>)</span>
+	</span>{
+		
+		<span class="hljs-comment">//实例化下部桥墩</span>
+		F1=InstantiateTemplate(<span class="hljs-string">"Res3"</span>,destination2.Instance)
+		F1-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,axisList.GetItem (i))
+		<span class="hljs-comment">//修正数据</span>
+		<span class="hljs-comment">//F1-&gt;SetAttributeDimension("PIER_HEIGHT",PierHeight,"LENGTH")</span>
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P1_RW"</span>,L2length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"P1_LW"</span>,R2length,<span class="hljs-string">"LENGTH"</span>)
+		F1-&gt;SetAttributeInteger(<span class="hljs-string">"DIRECTION"</span>,<span class="hljs-number">0</span>)
+		F1-&gt;SetAttributeDimension(<span class="hljs-string">"PILE_H"</span>,PileHeight,<span class="hljs-string">"LENGTH"</span>)				<span class="hljs-comment">//F2-&gt;SetAttributeString("跨号" , "跨号-"+ToString(i) )</span>
+		EndModifyTemplate(F1)
+		
+	}
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i==axisList.Size ())
+	{
+		
+		<span class="hljs-comment">//实例化下部桥墩</span>
+		F2=InstantiateTemplate(<span class="hljs-string">"Res3"</span>,destination2.Instance)
+		F2-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,axisList.GetItem (i))
+		<span class="hljs-comment">//修正数据</span>
+		F2-&gt;SetAttributeDimension(<span class="hljs-string">"P1_RW"</span>,L2length,<span class="hljs-string">"LENGTH"</span>)
+		F2-&gt;SetAttributeDimension(<span class="hljs-string">"P1_LW"</span>,R2length,<span class="hljs-string">"LENGTH"</span>)
+		F2-&gt;SetAttributeInteger(<span class="hljs-string">"DIRECTION"</span>,<span class="hljs-number">1</span>)
+		F2-&gt;SetAttributeDimension(<span class="hljs-string">"PILE_H"</span>,PileHeight,<span class="hljs-string">"LENGTH"</span>)
+			
+		<span class="hljs-comment">//F2-&gt;SetAttributeString("跨号" , "跨号-"+ToString(i) )</span>
+		EndModifyTemplate(F2)
+	}
+	
+}
+</div></code></pre>
+<h2 id="%E5%AF%BC%E5%87%BA%E6%95%B4%E4%BD%93%E6%95%B0%E6%8D%AE%E5%88%B0%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1%E8%A1%A8">导出整体数据到总体设计表</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">/* 工作指令 创建者 liudi 2020/7/12 */</span>
+let i,j,k,a(Integer )
+let myshape,mypart(VPMInstance)
+let shapepoint,shapepoint1(PartFeature )
+let shapelist,partlist,boxlist,boxlist1,pointlist,planelist(List)
+<span class="hljs-function">let <span class="hljs-title">DT</span><span class="hljs-params">(DTSheetType )</span>
+let myname,sheetname,boxname,ptname,outstring,<span class="hljs-title">myout</span><span class="hljs-params">(String )</span>
+let box,<span class="hljs-title">onebox</span><span class="hljs-params">(OpenBodyFeature )</span>
+let pt,pt0,pt1,pt2,<span class="hljs-title">pt3</span><span class="hljs-params">(Point)</span>
+let L,D,x1,x2,x3,y1,y2,y3,z1,z2,<span class="hljs-title">z3</span><span class="hljs-params">(LENGTH )</span>
+let <span class="hljs-title">F</span><span class="hljs-params">(Feature)</span>
+let <span class="hljs-title">pla</span><span class="hljs-params">(Plane)</span>
+
+shapepoint</span>=GetPLMOwner(myplane)
+shapepoint1 = shapepoint.Find(<span class="hljs-string">"PartFeature"</span>, <span class="hljs-string">""</span>, <span class="hljs-keyword">true</span>)
+SetWorkingContext(shapepoint1 )
+onebox=<span class="hljs-keyword">new</span>(<span class="hljs-string">"OpenBodyFeature"</span> ,<span class="hljs-string">"000"</span>,shapepoint1)
+pt1=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Point"</span>,<span class="hljs-string">"1"</span>,onebox)
+pt1=pointonplane(myplane,point(<span class="hljs-number">0</span>m,<span class="hljs-number">0</span>m,<span class="hljs-number">0</span>m),<span class="hljs-number">1</span>m,<span class="hljs-number">10</span>m)
+pt2=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Point"</span>,<span class="hljs-string">"2"</span>,onebox)
+pt2=pointonplane(myplane,point(<span class="hljs-number">0</span>m,<span class="hljs-number">0</span>m,<span class="hljs-number">0</span>m),<span class="hljs-number">42</span>m,<span class="hljs-number">35</span>m)
+pt3=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Point"</span>,<span class="hljs-string">"3"</span>,onebox)
+pt3=pointonplane(myplane,point(<span class="hljs-number">0</span>m,<span class="hljs-number">0</span>m,<span class="hljs-number">0</span>m),<span class="hljs-number">25</span>m,<span class="hljs-number">18</span>m)
+shapepoint1.Update ()
+x1=pt1.coord (<span class="hljs-number">1</span>)
+y1=pt1.coord (<span class="hljs-number">2</span>)
+z1=pt1.coord (<span class="hljs-number">3</span>)
+x2=pt2.coord (<span class="hljs-number">1</span>)
+y2=pt2.coord (<span class="hljs-number">2</span>)
+z2=pt2.coord (<span class="hljs-number">3</span>)
+x3=pt3.coord (<span class="hljs-number">1</span>)
+y3=pt3.coord (<span class="hljs-number">2</span>)
+z3=pt3.coord (<span class="hljs-number">3</span>)
+onebox.Delete ()
+set DT=CreateSheet(strFileName)
+sheetname=<span class="hljs-string">"距离(m)"</span>
+partlist=Location.Query(<span class="hljs-string">"VPMInstance"</span>,NULL)
+shapelist=Location.Query(<span class="hljs-string">"PartFeature"</span>,NULL)
+i=<span class="hljs-number">1</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=partlist.Size ()
+{
+	myshape=shapelist[i]
+	boxlist=myshape.Children
+	boxlist1=boxlist.Filter(<span class="hljs-string">"OpenBodyFeature"</span>,<span class="hljs-string">"x.Name  == \"EXPORT_DIM\""</span>)
+	<span class="hljs-keyword">if</span> boxlist1.Size ()==<span class="hljs-number">0</span>
+	{
+		<span class="hljs-keyword">break</span>
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		SetWorkingContext(myshape )
+		box=boxlist1[<span class="hljs-number">1</span>]
+		pla=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Plane"</span>,<span class="hljs-string">"000"</span>,box)
+		pla=plane(point(x1,y1,z1),point(x2,y2,z2),point(x3,y3,z3))
+		pointlist=box.Children
+		k=pointlist.Size ()
+	
+		<span class="hljs-comment">/*********************/</span>
+		pt=pointlist[<span class="hljs-number">1</span>]
+		D=distance(pt,pla)
+		L=D/<span class="hljs-number">1000</span>
+		outstring=L
+		a=outstring.Length ()
+		myout=outstring.Extract (<span class="hljs-number">0</span>,a-<span class="hljs-number">2</span>)
+		DT-&gt;SetCell(<span class="hljs-number">6</span>+i,<span class="hljs-number">60</span>,myout)
+		<span class="hljs-comment">/*********************/</span>
+		
+		<span class="hljs-comment">/*********************/</span>
+		pt=pointlist[<span class="hljs-number">2</span>]
+		D=distance(pt,pla)
+		L=D/<span class="hljs-number">1000</span>
+		outstring=L
+		a=outstring.Length ()
+		myout=outstring.Extract (<span class="hljs-number">0</span>,a-<span class="hljs-number">2</span>)
+		DT-&gt;SetCell(<span class="hljs-number">6</span>+i,<span class="hljs-number">61</span>,myout)
+		<span class="hljs-comment">/*********************/</span>
+		
+		<span class="hljs-comment">/*********************/</span>
+		pt=pointlist[<span class="hljs-number">2</span>]
+		pt0=pointlist[<span class="hljs-number">3</span>]
+		D=distance(pt,pt0)
+		L=D/<span class="hljs-number">1000</span>
+		outstring=L
+		a=outstring.Length ()
+		myout=outstring.Extract (<span class="hljs-number">0</span>,a-<span class="hljs-number">2</span>)
+		DT-&gt;SetCell(<span class="hljs-number">6</span>+i,<span class="hljs-number">62</span>,myout)
+		<span class="hljs-comment">/*********************/</span>
+		
+		<span class="hljs-comment">/*********************/</span>
+		pt=pointlist[<span class="hljs-number">3</span>]
+		D=distance(pt,pla)
+		L=D/<span class="hljs-number">1000</span>
+		outstring=L
+		a=outstring.Length ()
+		myout=outstring.Extract (<span class="hljs-number">0</span>,a-<span class="hljs-number">2</span>)
+		DT-&gt;SetCell(<span class="hljs-number">6</span>+i,<span class="hljs-number">63</span>,myout)
+		<span class="hljs-comment">/*********************/</span>
+		
+		pt=pointlist[<span class="hljs-number">4</span>]
+		pt0=pointlist[<span class="hljs-number">3</span>]
+		D=distance(pt,pt0)
+		L=D/<span class="hljs-number">1000</span>
+		outstring=L
+		a=outstring.Length ()
+		myout=outstring.Extract (<span class="hljs-number">0</span>,a-<span class="hljs-number">2</span>)
+		DT-&gt;SetCell(<span class="hljs-number">6</span>+i,<span class="hljs-number">64</span>,myout)
+		<span class="hljs-comment">/*********************/</span>
+		
+		<span class="hljs-comment">/*********************/</span>
+		pt=pointlist[<span class="hljs-number">4</span>]
+		D=distance(pt,pla)
+		L=D/<span class="hljs-number">1000</span>
+		outstring=L
+		a=outstring.Length ()
+		myout=outstring.Extract (<span class="hljs-number">0</span>,a-<span class="hljs-number">2</span>)
+		DT-&gt;SetCell(<span class="hljs-number">6</span>+i,<span class="hljs-number">65</span>,myout)
+		<span class="hljs-comment">/*********************/</span>
+		
+		<span class="hljs-comment">/*********************/</span>
+		pt=pointlist[<span class="hljs-number">5</span>]
+		D=distance(pt,pla)
+		L=D/<span class="hljs-number">1000</span>
+		outstring=L
+		a=outstring.Length ()
+		myout=outstring.Extract (<span class="hljs-number">0</span>,a-<span class="hljs-number">2</span>)
+		DT-&gt;SetCell(<span class="hljs-number">6</span>+i,<span class="hljs-number">66</span>,myout)
+		<span class="hljs-comment">/*********************/</span>
+		pla.Delete ()
+	}
+	i=i+<span class="hljs-number">1</span>
+}
+
+</div></code></pre>
+<h2 id="%E5%AF%BC%E5%87%BA%E5%9E%AB%E7%9F%B3%E6%95%B0%E6%8D%AE">导出垫石数据</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">//Location :  VPMReference,strFileName :  String,ReferAxis :  AxisSystem </span>
+<span class="hljs-comment">/* 工作指令 创建者 liudi 2020/7/21 */</span>
+let i,j,k,a,a1,b,c,d,e(Integer )
+let myshape,mypart(VPMInstance)
+let partlist,chlist1,chlist2,chlist3,mmlist1,mmlist2,mylist,mylist1,mylist2,onelist(List)
+<span class="hljs-function">let <span class="hljs-title">DT</span><span class="hljs-params">(DTSheetType )</span>
+let box,<span class="hljs-title">onebox</span><span class="hljs-params">(OpenBodyFeature )</span>
+let partname,outpartname,username,outname,mylength,outmylength,myv,outmyv,x1,y1,z1,x2,y2,<span class="hljs-title">z2</span><span class="hljs-params">(String )</span>
+let yx1,yx2,yx3,<span class="hljs-title">yx4</span><span class="hljs-params">(MMOrderedGeometricalSet)</span>
+let mybody,mybody2,<span class="hljs-title">body1</span><span class="hljs-params">(BodyFeature )</span>
+let <span class="hljs-title">myuserfeature</span><span class="hljs-params">(UserFeature )</span>
+let <span class="hljs-title">sur</span><span class="hljs-params">(Surface )</span>
+let <span class="hljs-title">pt</span><span class="hljs-params">(Point )</span>
+let v,vo,<span class="hljs-title">outv</span><span class="hljs-params">(Real )</span>
+let <span class="hljs-title">xplane</span><span class="hljs-params">(Plane )</span>
+let <span class="hljs-title">xdir</span><span class="hljs-params">(Direction )</span>
+let x,y,<span class="hljs-title">z</span><span class="hljs-params">(LENGTH)</span>
+let <span class="hljs-title">myaxis</span><span class="hljs-params">(AxisSystem )</span>
+
+set DT</span>=CreateSheet(strFileName)
+partlist=Location.Query(<span class="hljs-string">"PartFeature"</span>,NULL)
+
+i=<span class="hljs-number">1</span>
+a1=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=partlist.Size ()
+{
+	mypart=partlist[i]
+	SetWorkingContext(mypart)
+	partname=mypart.Name
+	b=partname.Length ()
+	outpartname=partname.Extract (<span class="hljs-number">0</span>,b-<span class="hljs-number">4</span>)
+	DT-&gt;SetCell(a1+<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,outpartname)			<span class="hljs-comment">//第一栏数据</span>
+	chlist1=mypart.Children
+	mmlist1=chlist1.Filter (<span class="hljs-string">"MMOrderedGeometricalSet"</span>,NULL)
+	yx1=mmlist1[<span class="hljs-number">1</span>]
+	chlist2=yx1.Children
+	mmlist2=chlist2.Filter (<span class="hljs-string">"MMOrderedGeometricalSet"</span>,NULL)
+	yx2=mmlist2[<span class="hljs-number">3</span>]
+	chlist3=yx2.Children
+	j=chlist3.Size ()
+	yx3=chlist3[j]
+	<span class="hljs-comment">//body1=new("BodyFeature","0000",yx3)</span>
+	mylist=yx3.Children
+	mybody=mylist[<span class="hljs-number">1</span>]
+	mybody2=mylist[<span class="hljs-number">2</span>]
+	mylist1=mybody.Children
+	mylist2=mybody2.Children
+	onelist=mylist1+mylist2
+	k=onelist.Size ()
+	a=<span class="hljs-number">1</span>
+	<span class="hljs-keyword">for</span> a <span class="hljs-keyword">while</span> a&lt;=k
+	{
+		myuserfeature=onelist[a]
+		username=myuserfeature.Name 
+		c=username.Length ()
+		outname=username.Extract(<span class="hljs-number">0</span>,c-<span class="hljs-number">3</span>)
+		DT-&gt;SetCell(a1+<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,username)				<span class="hljs-comment">//第二栏数据</span>
+		v=myuserfeature.GetAttributeReal(<span class="hljs-string">'下垫石体积'</span>)
+		myv=ToString(v)
+		DT-&gt;SetCell(a1+<span class="hljs-number">1</span>,<span class="hljs-number">6</span>,myv)
+		v=myuserfeature.GetAttributeReal(<span class="hljs-string">'上垫石体积'</span>)
+		myv=ToString(v)
+		DT-&gt;SetCell(a1+<span class="hljs-number">1</span>,<span class="hljs-number">7</span>,myv)
+		pt=myuserfeature.GetAttributeObject(<span class="hljs-string">'COORD_PT'</span>)
+		x=pt.coord (<span class="hljs-number">1</span>,ReferAxis)
+		y=pt.coord (<span class="hljs-number">2</span>,ReferAxis)
+		z=pt.coord (<span class="hljs-number">3</span>,ReferAxis)
+		x1=ToString(x)
+		c=x1.Length ()
+		x2=x1.Extract(<span class="hljs-number">0</span>,c-<span class="hljs-number">2</span>)
+		y1=ToString(y)
+		c=y1.Length ()
+		y2=y1.Extract(<span class="hljs-number">0</span>,c-<span class="hljs-number">2</span>)
+		z1=ToString(z)
+		c=z1.Length ()
+		z2=z1.Extract(<span class="hljs-number">0</span>,c-<span class="hljs-number">2</span>)
+		DT-&gt;SetCell(a1+<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,x2)
+		DT-&gt;SetCell(a1+<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,y2)
+		DT-&gt;SetCell(a1+<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,z2)
+		a1=a1+<span class="hljs-number">1</span>
+	}
+	
+}
+
+</div></code></pre>
+<h2 id="%E5%AF%BC%E5%87%BA%E5%9F%BA%E6%A1%A9%E6%95%B0%E6%8D%AE">导出基桩数据</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">//Location :  VPMReference,strFileName :  String,ReferAxis :  AxisSystem </span>
+<span class="hljs-comment">/* 工作指令 创建者 liudi 2020/7/23 */</span>
+let i,j,k,a,b(Integer )
+<span class="hljs-function">let <span class="hljs-title">myshape</span><span class="hljs-params">(VPMInstance)</span>
+let <span class="hljs-title">mypart</span><span class="hljs-params">(PartFeature)</span>
+let <span class="hljs-title">DT</span><span class="hljs-params">(DTSheetType )</span>
+let partlist,shapelist,boxlist,list1,list2,ptlist,yxlist1,yxlist2,yxlist3,bodylist,list3,<span class="hljs-title">culist</span><span class="hljs-params">(List )</span>
+let yx1,yx2,yx3,<span class="hljs-title">yx4</span><span class="hljs-params">(MMOrderedGeometricalSet)</span>
+let mybox,<span class="hljs-title">box</span><span class="hljs-params">(OpenBodyFeature )</span>
+let <span class="hljs-title">partname</span><span class="hljs-params">(String )</span>
+let pt,<span class="hljs-title">mypoint</span><span class="hljs-params">(Point )</span>
+let xplane,plane1,<span class="hljs-title">myplane</span><span class="hljs-params">(Plane )</span>
+let <span class="hljs-title">mybody</span><span class="hljs-params">(BodyFeature )</span>
+let allcu,<span class="hljs-title">mycu</span><span class="hljs-params">(Curve )</span>
+let <span class="hljs-title">tutai</span><span class="hljs-params">(Surface)</span>
+let x,<span class="hljs-title">y</span><span class="hljs-params">(LENGTH )</span>
+
+set DT</span>=CreateSheet(strFileName)
+partlist=Location.Query(<span class="hljs-string">"VPMInstance"</span>,NULL)
+shapelist=Location.Query(<span class="hljs-string">"PartFeature"</span>,NULL)
+j=partlist.Size ()
+
+i=<span class="hljs-number">1</span>
+k=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=j
+{
+	mypart=partlist[i]
+	myshape=shapelist[i]
+	partname=mypart.Name ()
+	DT-&gt;SetCell(k+<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,partname)
+	SetWorkingContext(myshape)
+	list1=myshape.Children
+	list2=list1.Filter (<span class="hljs-string">"OpenBodyFeature"</span>,NULL)
+	box=list2[<span class="hljs-number">2</span>]
+	ptlist=box.Children
+	pt=ptlist[<span class="hljs-number">4</span>]
+	mybox=<span class="hljs-keyword">new</span>(<span class="hljs-string">"OpenBodyFeature"</span>,<span class="hljs-string">"参照"</span>,myshape)
+	xplane=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Plane"</span> ,<span class="hljs-string">"水平面"</span>,mybox)
+	xplane=plane(point(<span class="hljs-number">0</span>mm,<span class="hljs-number">0</span>mm,<span class="hljs-number">0</span>mm),point(<span class="hljs-number">1</span>mm,<span class="hljs-number">0</span>mm,<span class="hljs-number">0</span>mm),point(<span class="hljs-number">0</span>mm,<span class="hljs-number">1</span>mm,<span class="hljs-number">0</span>mm))
+	plane1=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Plane"</span> ,<span class="hljs-string">"过渡平面"</span>,mybox)
+	set plane1=planeoffset(xplane,pt)
+	myplane=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Plane"</span> ,<span class="hljs-string">"相交平面"</span>,mybox)
+	myplane=planeoffset(plane1,-<span class="hljs-number">200</span>mm,<span class="hljs-keyword">true</span>)
+	
+	yxlist1=list1.Filter (<span class="hljs-string">"MMOrderedGeometricalSet"</span>,NULL)
+	yx1=yxlist1[<span class="hljs-number">1</span>]
+	yxlist2=yx1.Children
+	yxlist3=yxlist2.Filter (<span class="hljs-string">"MMOrderedGeometricalSet"</span>,NULL)
+	yx2=yxlist3[<span class="hljs-number">3</span>]
+	bodylist=yx2.Children
+	mybody=bodylist[<span class="hljs-number">5</span>]
+	list3=mybody.Children
+	allcu=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Curve"</span> ,<span class="hljs-string">"相交线"</span>,mybox)
+	allcu=intersect(myplane,list3[<span class="hljs-number">1</span>])
+	culist=disassemble(allcu,<span class="hljs-keyword">false</span>)
+	a=culist.Size ()
+	b=<span class="hljs-number">1</span>
+	<span class="hljs-keyword">for</span> b <span class="hljs-keyword">while</span> b&lt;=a
+	{
+		mycu=culist[b]
+		mypoint=<span class="hljs-keyword">new</span>(<span class="hljs-string">"Point"</span> ,<span class="hljs-string">"点_"</span>+b,mybox)
+		mypoint=centerofgravity(mycu)
+		DT-&gt;SetCell(k+<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,b)
+		x=mypoint.coord (<span class="hljs-number">1</span>,ReferAxis)
+		y=mypoint.coord (<span class="hljs-number">2</span>,ReferAxis)
+		DT-&gt;SetCell(k+<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,x)
+		DT-&gt;SetCell(k+<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,y)
+		k=k+<span class="hljs-number">1</span>
+	}
+	mybox.Update ()
+	mybox.Delete ()
+}
+
+</div></code></pre>
+<h2 id="%E8%BF%9E%E7%BB%AD%E6%A2%81%E4%B8%8E%E7%AE%80%E6%94%AF%E6%A2%81%E5%B7%A5%E7%A8%8B%E6%A8%A1%E6%9D%BF%E4%BB%A3%E7%A0%81">连续梁与简支梁工程模板代码</h2>
+<h3 id="%E5%8F%8D%E8%BD%AC%E8%BE%93%E5%85%A5%E6%9D%A1%E4%BB%B6">反转输入条件</h3>
+<pre class="hljs"><code><div>
+set ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Curve<span class="hljs-number">.6</span>=invert(ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Sketch<span class="hljs-number">.242</span> )
+set ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Curve<span class="hljs-number">.7</span>=invert(ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Sketch<span class="hljs-number">.243</span> )
+
+</div></code></pre>
+<h3 id="%E4%B8%AD%E8%B7%A8%E4%BD%8D%E7%BD%AE%E8%AE%BE%E5%AE%9A">中跨位置设定</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/*规则 创建者 DESKTOP 2020/4/26*/</span>
+
+<span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定` ==<span class="hljs-string">"中跨"</span>
+{
+	`ALL_BEAMS\PARAMETERS\边跨判断`=<span class="hljs-number">1</span>
+}
+<span class="hljs-keyword">else</span>
+{
+	`ALL_BEAMS\PARAMETERS\边跨判断` =<span class="hljs-number">0</span>
+}
+</div></code></pre>
+<h3 id="%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%AE%9A%E4%B9%89">位置参数定义</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/*规则 创建者 DESKTOP 2020/4/27*/</span>
+
+<span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定`==<span class="hljs-string">"中跨"</span>
+	`端封板判断`=<span class="hljs-string">"ALL"</span>
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定`==<span class="hljs-string">"小里程边跨"</span>
+	`端封板判断`=<span class="hljs-string">"P2"</span>
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定`==<span class="hljs-string">"大里程边跨"</span>
+	`端封板判断`=<span class="hljs-string">"P1"</span>
+
+</div></code></pre>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">/*规则 创建者 DESKTOP 2020/4/27*/</span>
+
+<span class="hljs-function">let <span class="hljs-title">F</span><span class="hljs-params">(UserFeature)</span>
+<span class="hljs-comment">//let l(list)</span>
+<span class="hljs-comment">//  l=obj.Query("UserFeature","")</span>
+
+<span class="hljs-keyword">if</span> UDFList.<span class="hljs-title">Size</span><span class="hljs-params">()</span>&gt;0
+</span>{
+	<span class="hljs-keyword">for</span> F inside UDFList
+	{
+		<span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定`==<span class="hljs-string">"小里程边跨"</span>
+		{
+			F-&gt;SetAttributeInteger(<span class="hljs-string">"DIRECTION"</span>,<span class="hljs-number">0</span>)
+		}
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定`==<span class="hljs-string">"大里程边跨"</span>
+		{
+			F-&gt;SetAttributeInteger(<span class="hljs-string">"DIRECTION"</span>,<span class="hljs-number">1</span>)
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			Notify(<span class="hljs-string">"梁为中跨箱梁，无需方向判断"</span>)
+		}
+		
+	}	
+}
+
+</div></code></pre>
+<h3 id="%E6%A2%81%E8%B7%9D%E7%A6%BB%E7%9A%84%E8%AE%A1%E7%AE%97">梁距离的计算</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/*Rule created by PZG4 4/28/2020*/</span>
+
+let i,j(Integer)
+let ptlist1,ptlist2(List)
+let pt1,pt2(point)
+let dis1,dis2 (length)
+let p1,p2,p3,p4(point)
+
+set ptlist1 =Point1
+set ptlist2 =Point2
+
+<span class="hljs-keyword">if</span> ptlist1.Size()&gt;<span class="hljs-number">2</span>
+{
+    p1=ptlist1[<span class="hljs-number">1</span>]
+    p2=ptlist1[<span class="hljs-number">2</span>]
+    Notify(<span class="hljs-string">"DIS:"</span>,dis1)
+    dis1=distance(p1,p2)
+    `ALL_BEAMS\PARAMETERS\P1梁距`=dis1
+}
+<span class="hljs-keyword">if</span> ptlist2.Size()&gt;<span class="hljs-number">2</span>
+{	
+    p3=ptlist2[<span class="hljs-number">1</span>]
+    p4=ptlist2[<span class="hljs-number">2</span>]
+    
+    Notify(<span class="hljs-string">"DIS:"</span>,dis2)
+    dis2=distance(p3,p4)
+    `ALL_BEAMS\PARAMETERS\P2梁距`=dis2
+}
+
+</div></code></pre>
+<h3 id="%E5%88%A0%E9%99%A4%E5%92%8C%E5%88%9B%E5%BB%BA%E6%A2%81%E9%9B%86%E5%90%88">删除和创建梁集合</h3>
+<pre class="hljs"><code><div>
+
+If hb1.Bodies.Count &lt;&gt; <span class="hljs-number">0</span> Then
+  CATIA.ActiveEditor.Selection.Clear
+  For k = <span class="hljs-number">1</span> To hb1.Bodies.Count
+    	Dim hb0obj As Body
+   	Set hb0obj = hb1.Bodies.Item(k)
+              CATIA.ActiveEditor.Selection.Add hb0obj      
+  Next
+ CATIA.ActiveEditor.Selection.Delete
+End If
+
+Dim i as integer
+For i = <span class="hljs-number">1</span> To icount
+	Dim hb2 As Body
+	Set hb2 = hb1.Bodies.Add
+	hb2.Name = <span class="hljs-string">"BEAM_"</span> + CStr(i)
+Next
+
+End Sub
+
+</div></code></pre>
+<h3 id="%E6%9B%B4%E6%96%B0%E6%A2%81">更新梁</h3>
+<pre class="hljs"><code><div>Dim part as Part
+Set part =ContainingPart(prt)
+
+part.InWorkObject=prt
+On Error Resume Next
+Part.UpdateObject(prt)
+
+<span class="hljs-function">End Sub
+
+
+Function <span class="hljs-title">ContainingPart</span><span class="hljs-params">(ByVal CatObject)</span>
+    Dim found As Boolean
+    Dim Current
+    Set Current </span>= CatObject
+    found = False
+    Do While found = False
+        Set Current = Current.<span class="hljs-function">Parent
+        If <span class="hljs-title">TypeName</span><span class="hljs-params">(Current)</span> </span>= <span class="hljs-string">"Part"</span> Then
+            found = True
+        End If
+    Loop
+    Set ContainingPart = Current
+End Function
+
+</div></code></pre>
+<h3 id="%E5%B0%8F%E7%AE%B1%E6%A2%81%E9%9B%86%E5%90%88">小箱梁集合</h3>
+<h4 id="%E5%88%9B%E5%BB%BA%E5%B0%8F%E7%AE%B1%E6%A2%81">创建小箱梁</h4>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">//定义变量</span>
+let i,j(integer)
+<span class="hljs-function">let <span class="hljs-title">beamcount</span> <span class="hljs-params">(integer)</span>
+let pt1,pt2,ptA1,pta1,ptA2,<span class="hljs-title">pta2</span><span class="hljs-params">(point)</span>
+let <span class="hljs-title">planerLn</span><span class="hljs-params">(line)</span>
+let pl1,pl2,pl3,<span class="hljs-title">pl4</span><span class="hljs-params">(plane)</span>
+let cu,cu1,cu2,cu3,<span class="hljs-title">cu4</span><span class="hljs-params">(curve)</span>
+let a1,<span class="hljs-title">a2</span><span class="hljs-params">(angle)</span>
+let D1,<span class="hljs-title">D2</span><span class="hljs-params">(length)</span>
+let <span class="hljs-title">F</span><span class="hljs-params">(feature)</span>
+let p1,p2,drwrailpt1,<span class="hljs-title">drwrailpt2</span><span class="hljs-params">(point)</span>
+let <span class="hljs-title">body1</span><span class="hljs-params">(body)</span>
+set p1</span>=ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\p1
+set p2=ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\p2
+set cu=project(ALL_BEAMS\INPUT\PLANER_CRV  ,`xy plane` ,direction(`xy plane` ))
+<span class="hljs-comment">//相交出两条曲线</span>
+set cu1=`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">1</span>`
+set cu2=`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">2</span>`
+
+i=<span class="hljs-number">1</span>
+
+beamcount=ALL_BEAMS\PARAMETERS\BEAM_COUNT
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=beamcount
+{
+	pta1=CreateOrModifyDatum(<span class="hljs-string">"point"</span>,ALL_BEAMS\DATUM\POINTS_1  ,Point11  ,i)
+	set pta1=pointoncurveRatio(ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Line<span class="hljs-number">.8507</span>  ,NULL,(i-<span class="hljs-number">1</span>)/(beamcount-<span class="hljs-number">1</span>),<span class="hljs-keyword">true</span>)
+	
+	ptA1=CreateOrModifyDatum(<span class="hljs-string">"point"</span>,ALL_BEAMS\DATUM\POINTS_1  ,Point1 ,i)
+	set ptA1=project(pta1 ,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Multi-sections Surface<span class="hljs-number">.62</span>`  ,direction(`xy plane` ))
+	
+	pta2=CreateOrModifyDatum(<span class="hljs-string">"point"</span>,ALL_BEAMS\DATUM\POINTS_2  ,Point22  ,i)
+	set pta2=pointoncurveRatio(ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Line<span class="hljs-number">.8508</span>  ,NULL,(i-<span class="hljs-number">1</span>)/(beamcount-<span class="hljs-number">1</span>),<span class="hljs-keyword">true</span>)
+	
+	ptA2=CreateOrModifyDatum(<span class="hljs-string">"point"</span>,ALL_BEAMS\DATUM\POINTS_2  ,Point2 ,i)
+	set ptA2=project(pta2 ,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Multi-sections Surface<span class="hljs-number">.62</span>`   ,direction(`xy plane` ))
+	
+	ptA1.Name =<span class="hljs-string">"PTA_1_"</span>+i
+	ptA2.Name =<span class="hljs-string">"PTA_2_"</span>+i
+	pta1.Name =<span class="hljs-string">"PTB_1_"</span>+i
+	pta1.Name =<span class="hljs-string">"PTB_2_"</span>+i
+	
+	planerLn=CreateOrModifyDatum(<span class="hljs-string">"Line"</span>,ALL_BEAMS\DATUM\LINES ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAMS\PlanerLnList ,i)
+	planerLn=line(pta1,pta2)
+	planerLn.Color=<span class="hljs-string">"224,2,32"</span>
+	planerLn.Name=<span class="hljs-string">"LN_"</span>+i
+}
+
+j=<span class="hljs-number">1</span>
+
+ALL_BEAMS\RELATIONS\REFERENCE_RELATIONS\VBScriptNewBody\CREATE_BODY.Run(ALL_BEAMS\MODEL\BEAMS_SETS ,beamcount)
+<span class="hljs-function">let <span class="hljs-title">blist</span><span class="hljs-params">(List)</span>
+blist </span>= ALL_BEAMS\MODEL\BEAMS_SETS.Query(<span class="hljs-string">"BodyFeature"</span>,<span class="hljs-string">""</span>)
+<span class="hljs-function">let <span class="hljs-title">beambody</span><span class="hljs-params">(BodyFeature)</span>
+
+<span class="hljs-keyword">for</span> j <span class="hljs-keyword">while</span> j &lt;</span>=beamcount
+{
+	beambody=blist[j]
+	<span class="hljs-keyword">if</span> (`ALL_BEAMS\PARAMETERS\边跨判断`==<span class="hljs-string">"1"</span>)
+	{
+		F=CreateOrModifyTemplate(<span class="hljs-string">"R1"</span> ,beambody  ,UDFList ,j)
+		F-&gt;SetAttributeObject(<span class="hljs-string">"p1"</span>,Point1 .GetItem (j))
+		F-&gt;SetAttributeObject(<span class="hljs-string">"p2"</span>, Point2 .GetItem (j))
+		F-&gt;SetAttributeObject(<span class="hljs-string">"curve1"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">01</span>` )
+		F-&gt;SetAttributeObject(<span class="hljs-string">"curve2"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">02</span>`)	
+		F-&gt;SetAttributeObject(<span class="hljs-string">"curve3"</span>,ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\MiddleCrvDRV  )	
+		<span class="hljs-comment">//F-&gt;SetAttributeInteger("ORIENTATION",1)</span>
+		
+		
+	}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (`ALL_BEAMS\PARAMETERS\边跨判断`==<span class="hljs-string">"0"</span>)
+	{
+		F=CreateOrModifyTemplate(<span class="hljs-string">"R2"</span> ,beambody ,UDFList ,j)
+		F-&gt;SetAttributeObject(<span class="hljs-string">"p1"</span>,Point1 .GetItem (j))
+		F-&gt;SetAttributeObject(<span class="hljs-string">"p2"</span>, Point2 .GetItem (j))
+		F-&gt;SetAttributeObject(<span class="hljs-string">"curve1"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">01</span>` )
+		F-&gt;SetAttributeObject(<span class="hljs-string">"curve2"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">02</span>`)
+		F-&gt;SetAttributeObject(<span class="hljs-string">"curve3"</span>,ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\MiddleCrvDRV  )	
+	}
+	
+	EndModifyTemplate(F)
+	F.Name =<span class="hljs-string">"梁段_"</span>+j
+	
+	
+}
+
+drwrailpt1=CreateOrModifyDatum(<span class="hljs-string">"point"</span>,ALL_BEAMS\DATUM\OTHER_PTS ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAMS\DrwRail_List_1 ,<span class="hljs-number">1</span>)
+drwrailpt1=pointoncurveRatio(`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">01</span>` ,NULL,<span class="hljs-number">0</span>,<span class="hljs-keyword">true</span>)
+
+drwrailpt2=CreateOrModifyDatum(<span class="hljs-string">"point"</span>,ALL_BEAMS\DATUM\OTHER_PTS ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAMS\DrwRail_List_1 ,<span class="hljs-number">1</span>)
+drwrailpt2=pointoncurveRatio(`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">01</span>` ,NULL,<span class="hljs-number">1</span>,<span class="hljs-keyword">true</span>)
+Notify(<span class="hljs-string">"梁段数="</span>,beamcount)
+
+
+</div></code></pre>
+<h4 id="%E6%9B%B4%E6%96%B0%E5%B0%8F%E7%AE%B1%E6%A2%81">更新小箱梁</h4>
+<pre class="hljs"><code><div>
+let p1list,p2list,udflist(List)
+let udf,blockudf1,blockudf2 (Feature)
+<span class="hljs-function">let <span class="hljs-title">i</span><span class="hljs-params">(integer)</span>
+let dis1,dis2,disa,<span class="hljs-title">disb</span><span class="hljs-params">(Length)</span>
+set p1list</span>=Point11
+set p2list=Point22
+set udflist=<span class="hljs-function">UDFList
+let <span class="hljs-title">BeamType</span><span class="hljs-params">(string)</span>
+BeamType</span>=`ALL_BEAMS\PARAMETERS\位置设定`
+i=<span class="hljs-number">1</span>
+set dis1=distance(p1list[<span class="hljs-number">1</span>],p1list[<span class="hljs-number">2</span>])
+set dis2=distance(p2list[<span class="hljs-number">1</span>],p2list[<span class="hljs-number">2</span>])
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=p1list.Size()
+{
+	Notify(<span class="hljs-string">"Distance1:"</span>,dis1)
+	Notify(<span class="hljs-string">"Distance2:"</span>,dis2)
+	<span class="hljs-keyword">if</span> (BeamType==<span class="hljs-string">"中跨"</span>)
+	{
+		set udf=udflist[i]
+		<span class="hljs-keyword">if</span> i==<span class="hljs-number">1</span>
+		{
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度`-`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			Notify(<span class="hljs-string">"修改成功"</span>,udf.Name)	
+		}
+		<span class="hljs-keyword">if</span> i&gt;<span class="hljs-number">1</span> and i&lt; p1list.Size()
+		{
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度`-`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)				
+		}
+		<span class="hljs-keyword">if</span> i==p1list.Size()
+		{
+			
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)		
+		}
+	}
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (BeamType==<span class="hljs-string">"小里程边跨"</span>)
+	{	
+		set udf=udflist[i]
+		<span class="hljs-keyword">if</span> i==<span class="hljs-number">1</span>
+		{
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)		
+		}
+		<span class="hljs-keyword">if</span> i&gt;<span class="hljs-number">1</span> and i&lt; p1list.Size()
+		{
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度`-`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)	
+		}
+		<span class="hljs-keyword">if</span> i==p1list.Size()
+		{
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度`-`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)		
+		}
+	}
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (BeamType==<span class="hljs-string">"大里程边跨"</span>)
+	{	
+		set udf=udflist[i]
+		<span class="hljs-keyword">if</span> i==<span class="hljs-number">1</span>
+		{
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)		
+		}
+		<span class="hljs-keyword">if</span> i&gt;<span class="hljs-number">1</span> and i&lt; p1list.Size()
+		{
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度`-`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)	
+		}
+		<span class="hljs-keyword">if</span> i==p1list.Size()
+		{
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_L"</span>,(dis1-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度`-`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_L"</span>,(dis2-`ALL_BEAMS\PARAMETERS\中梁预制固定宽度` -`ALL_BEAMS\PARAMETERS\现浇间距` )/<span class="hljs-number">2</span>,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_1_R"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)
+			udf.SetAttributeDimension(<span class="hljs-string">"DIM_2_R"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"LENGTH"</span>)		
+		}
+	}
+}
+</div></code></pre>
+<h4 id="%E7%AB%AF%E5%B0%81%E6%9D%BF%E5%88%A4%E6%96%AD">端封板判断</h4>
+<pre class="hljs"><code><div>
+
+let B1,B2(feature)
+let i,j(Integer)
+let ptlist1,ptlist2(List)
+let pt1,pt2(point)
+let dis1,dis2 (length)
+let udf1,udf2(Feature)
+<span class="hljs-function">let <span class="hljs-title">surf</span><span class="hljs-params">(surface)</span>
+set surf </span>=`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Multi-sections Surface<span class="hljs-number">.62</span>`
+set ptlist1 =Point1
+set ptlist2 =Point2
+i=<span class="hljs-number">1</span>
+j=<span class="hljs-number">1</span>
+
+<span class="hljs-keyword">if</span>(`端封板判断`==<span class="hljs-string">"P1"</span> )<span class="hljs-comment">//P1</span>
+{
+	
+	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=ptlist1.Size()
+	{
+		
+		B1=CreateOrModifyTemplate(<span class="hljs-string">"BB"</span> ,ALL_BEAMS\MODEL\MODEL_POURING_BEAM_P1   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAM_H\list1  ,i)
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist1 .GetItem (i))
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"CRV"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">01</span>` )
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"SURFACE"</span>,surf)
+		B1.SetAttributeInteger(<span class="hljs-string">"ORENTATION"</span>,<span class="hljs-number">0</span>)	
+		B1.Name=<span class="hljs-string">"B1-"</span>+i
+		
+		<span class="hljs-keyword">if</span> i==<span class="hljs-number">1</span>
+		{
+			B1.SetAttributeInteger(<span class="hljs-string">"CHECK_A"</span>,<span class="hljs-number">1</span>)
+			B1.SetAttributeInteger(<span class="hljs-string">"CHECK_B"</span>,<span class="hljs-number">0</span>)
+			
+		}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i==ptlist1.Size())
+		{
+			B1.SetAttributeInteger(<span class="hljs-string">"CHECK_A"</span>,<span class="hljs-number">0</span>)
+			B1.SetAttributeInteger(<span class="hljs-string">"CHECK_B"</span>,<span class="hljs-number">1</span>)
+		}<span class="hljs-function">a
+		<span class="hljs-title">EndModifyTemplate</span><span class="hljs-params">(B1)</span>
+		
+		
+	}
+}
+<span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(`端封板判断`==<span class="hljs-string">"P2"</span>)</span> <span class="hljs-comment">//P2</span>
+</span>{
+	
+	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">while</span> j&lt;=ptlist2.Size()
+	{
+		
+		B2=CreateOrModifyTemplate(<span class="hljs-string">"BB"</span> ,ALL_BEAMS\MODEL\MODEL_POURING_BEAM_P2   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAM_H\list2 ,j)
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist2 .GetItem (j))
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"CRV"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">02</span>` )
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"SURFACE"</span>,surf)
+		B2.SetAttributeInteger(<span class="hljs-string">"ORENTATION"</span>,<span class="hljs-number">1</span>)
+		B2.Name=<span class="hljs-string">"B2-"</span>+j
+		
+		<span class="hljs-keyword">if</span> j==<span class="hljs-number">1</span>
+		{
+			B2.SetAttributeInteger(<span class="hljs-string">"CHECK_A"</span>,<span class="hljs-number">0</span>)
+			B2.SetAttributeInteger(<span class="hljs-string">"CHECK_B"</span>,<span class="hljs-number">1</span>)
+		}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (j==ptlist2.Size())
+		{
+			B2.SetAttributeInteger(<span class="hljs-string">"CHECK_A"</span>,<span class="hljs-number">1</span>)
+			B2.SetAttributeInteger(<span class="hljs-string">"CHECK_B"</span>,<span class="hljs-number">0</span>)
+		}
+		EndModifyTemplate(B2)
+		
+		
+		
+	}
+	
+	
+}
+<span class="hljs-keyword">else</span> <span class="hljs-comment">//all</span>
+{
+	
+	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=ptlist1.Size()
+	{
+		
+		B1=CreateOrModifyTemplate(<span class="hljs-string">"BB"</span> ,ALL_BEAMS\MODEL\MODEL_POURING_BEAM_P1   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAM_H\list1  ,i)
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist1 .GetItem (i))
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"CRV"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">01</span>` )
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"SURFACE"</span>,surf)
+		B1.SetAttributeInteger(<span class="hljs-string">"ORENTATION"</span>,<span class="hljs-number">0</span>)	
+		B1.Name=<span class="hljs-string">"B1-"</span>+i
+		
+		<span class="hljs-keyword">if</span> i==<span class="hljs-number">1</span>
+		{
+			B1.SetAttributeInteger(<span class="hljs-string">"CHECK_A"</span>,<span class="hljs-number">1</span>)
+			B1.SetAttributeInteger(<span class="hljs-string">"CHECK_B"</span>,<span class="hljs-number">0</span>)
+			
+		}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i==ptlist1.Size())
+		{
+			B1.SetAttributeInteger(<span class="hljs-string">"CHECK_A"</span>,<span class="hljs-number">0</span>)
+			B1.SetAttributeInteger(<span class="hljs-string">"CHECK_B"</span>,<span class="hljs-number">1</span>)
+		}
+		EndModifyTemplate(B1)
+		
+		
+		
+	}
+	
+	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">while</span> j&lt;=ptlist2.Size()
+	{
+		
+		B2=CreateOrModifyTemplate(<span class="hljs-string">"BB"</span> ,ALL_BEAMS\MODEL\MODEL_POURING_BEAM_P2   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAM_H\list2  ,j)
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist2 .GetItem (j))
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"CRV"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">02</span>` )
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"SURFACE"</span>,surf)
+		B2.SetAttributeInteger(<span class="hljs-string">"ORENTATION"</span>,<span class="hljs-number">1</span>)
+		B2.Name=<span class="hljs-string">"B2-"</span>+j
+		
+		<span class="hljs-keyword">if</span> j==<span class="hljs-number">1</span>
+		{
+			B2.SetAttributeInteger(<span class="hljs-string">"CHECK_A"</span>,<span class="hljs-number">0</span>)
+			B2.SetAttributeInteger(<span class="hljs-string">"CHECK_B"</span>,<span class="hljs-number">1</span>)
+		}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (j==ptlist2.Size())
+		{
+			B2.SetAttributeInteger(<span class="hljs-string">"CHECK_A"</span>,<span class="hljs-number">1</span>)
+			B2.SetAttributeInteger(<span class="hljs-string">"CHECK_B"</span>,<span class="hljs-number">0</span>)
+		}
+		EndModifyTemplate(B2)
+		
+	}
+}
+</div></code></pre>
+<h4 id="%E7%AB%AF%E9%83%A8%E7%8E%B0%E6%B5%87%E9%83%A8%E4%BD%8D%E8%87%AA%E5%8A%A8%E9%80%82%E5%BA%94">端部现浇部位自动适应</h4>
+<pre class="hljs"><code><div>
+let p1list,p2list,udflist1,udflist2(List)
+let udf1,udf2 (UserFeature)
+let i,j(integer)
+let dis1,dis2,disa,disb(Length)
+set p1list=Point11
+set p2list=Point22
+set udflist1=ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAM_H\list1
+set udflist2=ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAM_H\<span class="hljs-function">list2
+let <span class="hljs-title">BeamType</span><span class="hljs-params">(string)</span>
+let <span class="hljs-title">gap</span><span class="hljs-params">(length)</span>
+gap</span>=`ALL_BEAMS\PARAMETERS\现浇间距`/<span class="hljs-number">2</span>
+
+BeamType=`ALL_BEAMS\PARAMETERS\位置设定`
+
+set dis1=distance(p1list[<span class="hljs-number">1</span>],p1list[<span class="hljs-number">2</span>])
+set dis2=distance(p2list[<span class="hljs-number">1</span>],p2list[<span class="hljs-number">2</span>])
+Notify(<span class="hljs-string">"Name:"</span>,dis1)
+Notify(<span class="hljs-string">"Name:"</span>,dis2)
+i=<span class="hljs-number">1</span>
+j=<span class="hljs-number">1</span>
+<span class="hljs-keyword">if</span> udflist1.Size()&lt;&gt;<span class="hljs-number">0</span>
+{
+	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=p1list.Size()
+	{
+		udf1=udflist1[i]
+		<span class="hljs-keyword">if</span> i==<span class="hljs-number">1</span>
+		{
+			udf1-&gt;SetAttributeDimension(<span class="hljs-string">"Length1"</span>,dis1/<span class="hljs-number">2</span>-(<span class="hljs-number">2676</span>mm/<span class="hljs-number">2</span>),<span class="hljs-string">"Length"</span>)
+			udf1-&gt;SetAttributeDimension(<span class="hljs-string">"Length2"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"Length"</span>)
+		}
+		<span class="hljs-keyword">if</span> i&gt;<span class="hljs-number">1</span> and i&lt; p1list.Size()
+		{
+			udf1-&gt;SetAttributeDimension(<span class="hljs-string">"Length1"</span>,dis1/<span class="hljs-number">2</span>-(<span class="hljs-number">2676</span>mm/<span class="hljs-number">2</span>),<span class="hljs-string">"Length"</span>)
+			udf1-&gt;SetAttributeDimension(<span class="hljs-string">"Length2"</span>,dis1/<span class="hljs-number">2</span>-(<span class="hljs-number">2676</span>mm/<span class="hljs-number">2</span>),<span class="hljs-string">"Length"</span>)				
+		}
+		<span class="hljs-keyword">if</span> i==p1list.Size()
+		{
+			udf1-&gt;SetAttributeDimension(<span class="hljs-string">"Length1"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"Length"</span>)
+			udf1-&gt;SetAttributeDimension(<span class="hljs-string">"Length2"</span>,dis1/<span class="hljs-number">2</span>-(<span class="hljs-number">2676</span>mm/<span class="hljs-number">2</span>),<span class="hljs-string">"Length"</span>)
+		}
+	}
+}
+
+<span class="hljs-keyword">if</span> udflist2.Size()&lt;&gt;<span class="hljs-number">0</span>
+{
+	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">while</span> j&lt;=p2list.Size()
+	{
+		udf2=udflist2[j]
+		<span class="hljs-keyword">if</span> j==<span class="hljs-number">1</span>
+		{
+			udf2-&gt;SetAttributeDimension(<span class="hljs-string">"Length1"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"Length"</span>)
+			udf2-&gt;SetAttributeDimension(<span class="hljs-string">"Length2"</span>,dis2/<span class="hljs-number">2</span>-(<span class="hljs-number">2676</span>mm/<span class="hljs-number">2</span>),<span class="hljs-string">"Length"</span>)
+		}
+		<span class="hljs-keyword">if</span> j&gt;<span class="hljs-number">1</span> and j&lt; p2list.Size()
+		{
+			udf2-&gt;SetAttributeDimension(<span class="hljs-string">"Length1"</span>,dis2/<span class="hljs-number">2</span>-(<span class="hljs-number">2676</span>mm/<span class="hljs-number">2</span>),<span class="hljs-string">"Length"</span>)
+			udf2-&gt;SetAttributeDimension(<span class="hljs-string">"Length2"</span>,dis2/<span class="hljs-number">2</span>-(<span class="hljs-number">2676</span>mm/<span class="hljs-number">2</span>),<span class="hljs-string">"Length"</span>)				
+		}
+		<span class="hljs-keyword">if</span> j==p2list.Size()
+		{
+			udf2-&gt;SetAttributeDimension(<span class="hljs-string">"Length1"</span>,dis2/<span class="hljs-number">2</span>-(<span class="hljs-number">2676</span>mm/<span class="hljs-number">2</span>),<span class="hljs-string">"Length"</span>)
+			udf2-&gt;SetAttributeDimension(<span class="hljs-string">"Length2"</span>,<span class="hljs-number">637</span>mm,<span class="hljs-string">"Length"</span>)
+		}
+	}
+}	
+</div></code></pre>
+<h4 id="%E6%9B%B4%E6%96%B0%E8%BE%B9%E8%B7%A8udf%E6%95%B0%E6%8D%AE">更新边跨UDF数据</h4>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">/*规则 创建者 DESKTOP 2020/7/7*/</span>
+let udf1,udf2(Feature)
+<span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定`==<span class="hljs-string">"大里程边跨"</span>
+{
+		udf1=UDFList[<span class="hljs-number">1</span>]
+		udf1-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_LEFT_CHECK"</span>,<span class="hljs-number">0</span>)
+		udf1-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_RIGHT_CHECK"</span>,<span class="hljs-number">1</span>)
+		udf2=UDFList[UDFList.Size()]
+		udf2-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_LEFT_CHECK"</span>,<span class="hljs-number">1</span>)
+		udf2-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_RIGHT_CHECK"</span>,<span class="hljs-number">0</span>)
+}
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定`==<span class="hljs-string">"小里程边跨"</span>
+{
+		udf1=UDFList[<span class="hljs-number">1</span>]
+		udf1-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_LEFT_CHECK"</span>,<span class="hljs-number">1</span>)
+		udf1-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_RIGHT_CHECK"</span>,<span class="hljs-number">0</span>)
+		udf2=UDFList[UDFList.Size()]
+		udf2-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_LEFT_CHECK"</span>,<span class="hljs-number">0</span>)
+		udf2-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_RIGHT_CHECK"</span>,<span class="hljs-number">1</span>)
+}
+<span class="hljs-keyword">else</span>
+{
+	udf1=UDFList[<span class="hljs-number">1</span>]
+	udf1-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_LEFT_CHECK"</span>,<span class="hljs-number">1</span>)
+	udf1-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_RIGHT_CHECK"</span>,<span class="hljs-number">0</span>)
+	udf2=UDFList[UDFList.Size()]
+	udf2-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_LEFT_CHECK"</span>,<span class="hljs-number">0</span>)
+	udf2-&gt;SetAttributeInteger(<span class="hljs-string">"SIDEBEAM_RIGHT_CHECK"</span>,<span class="hljs-number">1</span>)
+}
+
+
+</div></code></pre>
+<h4 id="%E5%9E%AB%E7%9F%B3%E7%9A%84%E5%88%9B%E5%BB%BA">垫石的创建</h4>
+<pre class="hljs"><code><div>let B1,B2(feature)
+let i,j(Integer)
+let ptlist1,ptlist2(List)
+let pt1,pt2(point)
+let dis1,dis2 (length)
+let udf1,udf2(Feature)
+<span class="hljs-function">let <span class="hljs-title">cushionHeight</span><span class="hljs-params">(length)</span>
+set ptlist1 </span>=Point1
+set ptlist2 =Point2
+
+set cushionHeight=CUSHION_HEIGHT
+i=<span class="hljs-number">1</span>
+j=<span class="hljs-number">1</span>
+
+<span class="hljs-keyword">if</span>(`ALL_BEAMS\PARAMETERS\位置设定` ==<span class="hljs-string">"中跨"</span> )<span class="hljs-comment">//P1</span>
+{
+	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=ptlist1.Size()
+	{
+		B1=CreateOrModifyTemplate(<span class="hljs-string">"DIANKUAI"</span> ,ALL_BEAMS\MODEL\MODEL_CUSHION\P1   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_CUSHION\List<span class="hljs-number">.1</span>   ,i)
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist1.GetItem (i))
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,`ALL_BEAMS\INPUT\AX-P1`  )
+		B1.SetAttributeDimension(<span class="hljs-string">"OFFSET_Z"</span>,<span class="hljs-number">1610</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"OFFSET_X"</span>,<span class="hljs-number">0</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.Name=<span class="hljs-string">"B1-"</span>+i	
+		
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石顺桥向长"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		<span class="hljs-comment">//B1.SetAttributeDimension("上垫石高",150mm,"LENGTH")</span>
+		B1.SetAttributeDimension(<span class="hljs-string">"支座顺桥向长"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座横向宽"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座中心间距"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"下垫石顺桥向长"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座高"</span>,<span class="hljs-number">110</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"下垫石高"</span>,<span class="hljs-number">150</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支承组合高度"</span>,cushionHeight,<span class="hljs-string">"LENGTH"</span>)
+		EndModifyTemplate(B1)
+	}	
+	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">while</span> j&lt;=ptlist2.Size()
+	{
+		B2=CreateOrModifyTemplate(<span class="hljs-string">"DIANKUAI"</span> ,ALL_BEAMS\MODEL\MODEL_CUSHION\P2   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_CUSHION\List<span class="hljs-number">.2</span>  ,j)
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist2 .GetItem (j))
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,`ALL_BEAMS\INPUT\AX-P2`  )
+		B2.SetAttributeDimension(<span class="hljs-string">"OFFSET_Z"</span>,<span class="hljs-number">1610</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"OFFSET_X"</span>,<span class="hljs-number">0</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石顺桥向长"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		<span class="hljs-comment">//B2.SetAttributeDimension("上垫石高",150mm,"LENGTH")</span>
+		B2.SetAttributeDimension(<span class="hljs-string">"支座顺桥向长"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座横向宽"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座中心间距"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"下垫石顺桥向长"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座高"</span>,<span class="hljs-number">110</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"下垫石高"</span>,<span class="hljs-number">150</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支承组合高度"</span>,cushionHeight,<span class="hljs-string">"LENGTH"</span>)
+		
+		B2.Name=<span class="hljs-string">"B2-"</span>+<span class="hljs-function">j	
+		<span class="hljs-title">EndModifyTemplate</span><span class="hljs-params">(B2)</span>	
+	}
+}
+<span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(`ALL_BEAMS\PARAMETERS\位置设定` ==<span class="hljs-string">"大里程边跨"</span>)</span> <span class="hljs-comment">//P2</span>
+</span>{
+	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=ptlist1.Size()
+	{
+		B1=CreateOrModifyTemplate(<span class="hljs-string">"DIANKUAI"</span> ,ALL_BEAMS\MODEL\MODEL_CUSHION\P1   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_CUSHION\List<span class="hljs-number">.1</span>   ,i)
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist1 .GetItem (i))
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,`ALL_BEAMS\INPUT\AX-P1`   )
+		B1.SetAttributeDimension(<span class="hljs-string">"OFFSET_Z"</span>,<span class="hljs-number">1610</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"OFFSET_X"</span>,-<span class="hljs-number">0</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.Name=<span class="hljs-string">"B1-"</span>+i	
+		
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石顺桥向长"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		<span class="hljs-comment">//B1.SetAttributeDimension("上垫石高",150mm,"LENGTH")</span>
+		B1.SetAttributeDimension(<span class="hljs-string">"支座顺桥向长"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座横向宽"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座中心间距"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"下垫石顺桥向长"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座高"</span>,<span class="hljs-number">110</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"下垫石高"</span>,<span class="hljs-number">150</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支承组合高度"</span>,cushionHeight,<span class="hljs-string">"LENGTH"</span>)
+		
+		EndModifyTemplate(B1)
+	}	
+	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">while</span> j&lt;=ptlist2.Size()
+	{
+		B2=CreateOrModifyTemplate(<span class="hljs-string">"DIANKUAI"</span> ,ALL_BEAMS\MODEL\MODEL_CUSHION\P2   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_CUSHION\List<span class="hljs-number">.2</span>   ,j)
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist2 .GetItem (j))
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,`ALL_BEAMS\INPUT\AX-P2`  )
+		B2.SetAttributeDimension(<span class="hljs-string">"OFFSET_Z"</span>,<span class="hljs-number">1610</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"OFFSET_X"</span>,-<span class="hljs-number">250</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.Name=<span class="hljs-string">"B2-"</span>+j	
+		
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石顺桥向长"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		<span class="hljs-comment">//B2.SetAttributeDimension("上垫石高",150mm,"LENGTH")</span>
+		B2.SetAttributeDimension(<span class="hljs-string">"支座顺桥向长"</span>,<span class="hljs-number">400</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座横向宽"</span>,<span class="hljs-number">350</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座中心间距"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"下垫石顺桥向长"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座高"</span>,<span class="hljs-number">110</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"下垫石高"</span>,<span class="hljs-number">150</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支承组合高度"</span>,cushionHeight,<span class="hljs-string">"LENGTH"</span>)
+		
+		EndModifyTemplate(B2)	
+		
+	}
+	
+}
+<span class="hljs-keyword">else</span>  <span class="hljs-comment">// 小里程边跨</span>
+{
+	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=ptlist1.Size()
+	{
+		
+		B1=CreateOrModifyTemplate(<span class="hljs-string">"DIANKUAI"</span> ,ALL_BEAMS\MODEL\MODEL_CUSHION\P1   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_CUSHION\List<span class="hljs-number">.1</span>    ,i)
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist1 .GetItem (i))
+		B1-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,`ALL_BEAMS\INPUT\AX-P1`  )
+		B1.SetAttributeDimension(<span class="hljs-string">"OFFSET_Z"</span>,<span class="hljs-number">1610</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"OFFSET_X"</span>,<span class="hljs-number">250</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.Name=<span class="hljs-string">"B1-"</span>+i	
+		
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石顺桥向长"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		<span class="hljs-comment">//B1.SetAttributeDimension("上垫石高",150mm,"LENGTH")</span>
+		B1.SetAttributeDimension(<span class="hljs-string">"支座顺桥向长"</span>,<span class="hljs-number">400</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座横向宽"</span>,<span class="hljs-number">350</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座中心间距"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"下垫石顺桥向长"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支座高"</span>,<span class="hljs-number">110</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"下垫石高"</span>,<span class="hljs-number">150</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B1.SetAttributeDimension(<span class="hljs-string">"支承组合高度"</span>,cushionHeight,<span class="hljs-string">"LENGTH"</span>)	
+		
+		EndModifyTemplate(B1)	
+	}	
+	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">while</span> j&lt;=ptlist2.Size()
+	{
+		B2=CreateOrModifyTemplate(<span class="hljs-string">"DIANKUAI"</span> ,ALL_BEAMS\MODEL\MODEL_CUSHION\P2   ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_CUSHION\List<span class="hljs-number">.2</span>  ,j)
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>,ptlist2 .GetItem (j))
+		B2-&gt;SetAttributeObject(<span class="hljs-string">"AXIS"</span>,`ALL_BEAMS\INPUT\AX-P2`  )
+		B2.SetAttributeDimension(<span class="hljs-string">"OFFSET_Z"</span>,<span class="hljs-number">1610</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"OFFSET_X"</span>,<span class="hljs-number">0</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.Name=<span class="hljs-string">"B2-"</span>+j
+		
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石顺桥向长"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		<span class="hljs-comment">//B2.SetAttributeDimension("上垫石高",150mm,"LENGTH")</span>
+		B2.SetAttributeDimension(<span class="hljs-string">"支座顺桥向长"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座横向宽"</span>,<span class="hljs-number">500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座中心间距"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"下垫石顺桥向长"</span>,<span class="hljs-number">750</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"上垫石横向宽"</span>,<span class="hljs-number">1500</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支座高"</span>,<span class="hljs-number">110</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"下垫石高"</span>,<span class="hljs-number">150</span>mm,<span class="hljs-string">"LENGTH"</span>)
+		B2.SetAttributeDimension(<span class="hljs-string">"支承组合高度"</span>,cushionHeight,<span class="hljs-string">"LENGTH"</span>)
+		
+		EndModifyTemplate(B2)	
+	}
+	
+}
+</div></code></pre>
+<h4 id="%E5%88%9B%E5%BB%BA%E6%A2%81%E7%BC%9D%E9%9A%99%E7%8E%B0%E6%B5%87%E5%9D%97">创建梁缝隙现浇块</h4>
+<pre class="hljs"><code><div>
+
+<span class="hljs-function">let <span class="hljs-title">F</span><span class="hljs-params">(UserFeature)</span>
+let <span class="hljs-title">i</span><span class="hljs-params">(Integer)</span>
+let p1,p2,p3,p4,pa,<span class="hljs-title">pb</span><span class="hljs-params">(point)</span>
+let <span class="hljs-title">ln</span><span class="hljs-params">(curve)</span>
+i</span>=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;Point1.Size()
+{	
+	<span class="hljs-comment">/*
+	set pa=pointbetween(Point1[i],Point1[i+1],0.5,false)
+	set pa=CreateOrModifyDatum("Point",`ALL_BEAMS\RESULT\MODEL_GAP\Ordered Geometrical Set.63`  ,`ALL_BEAMS\RELATIONS\KP_MODEL\Knowledge Pattern.18\PA_List` ,i)
+	pa.Name="Pa_"+ToString(i)
+	pa.Update()
+	
+	set pb=pointbetween(Point2 [i],Point2 [i+1],0.5,false)
+	set pb=CreateOrModifyDatum("Point",`ALL_BEAMS\RESULT\MODEL_GAP\Ordered Geometrical Set.63`  ,`ALL_BEAMS\RELATIONS\KP_MODEL\Knowledge Pattern.18\PB_List` ,i)
+	pb.Name="Pb_"+ToString(i)
+	pb.Update()
+	*/</span>
+	ln=CreateOrModifyDatum(<span class="hljs-string">"Line"</span>,ALL_BEAMS\DATUM\LINES ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAM_GAP\LineList ,i)
+	set ln=project(line(pointbetween(Point1[i],Point1[i+<span class="hljs-number">1</span>],<span class="hljs-number">0.5</span>,<span class="hljs-keyword">false</span>),pointbetween(Point2 [i],Point2 [i+<span class="hljs-number">1</span>],<span class="hljs-number">0.5</span>,<span class="hljs-keyword">false</span>)),`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Multi-sections Surface<span class="hljs-number">.62</span>` ,direction(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>))
+	ln.Name=<span class="hljs-string">"LN-"</span>+i
+	ln.Update()
+	
+	
+	F=CreateOrModifyTemplate(<span class="hljs-string">"BEAM_GAP"</span>,ALL_BEAMS\MODEL\MODEL_GAP\Body<span class="hljs-number">.8</span>  ,ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAM_GAP\BEAM_GAP_List  ,i)
+	<span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定`  ==<span class="hljs-string">"中跨"</span>
+	{
+		F-&gt;SetAttributeObject(<span class="hljs-string">"LINE"</span>,ln)
+		F-&gt;SetAttributeObject(<span class="hljs-string">"LINE1"</span>,`ALL_BEAMS\CONSTRUCTION\DRW_REF\Ordered Geometrical Set<span class="hljs-number">.33</span>\DRW_INT_LN` )
+		F-&gt;SetAttributeObject(<span class="hljs-string">"SURF"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Multi-sections Surface<span class="hljs-number">.62</span>`  )
+		F-&gt;SetAttributeString(<span class="hljs-string">"位置设定"</span>,<span class="hljs-string">"中跨"</span>)
+	}
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> `ALL_BEAMS\PARAMETERS\位置设定` ==<span class="hljs-string">"小里程边跨"</span>
+	{
+		F-&gt;SetAttributeObject(<span class="hljs-string">"LINE"</span>,ln)
+		F-&gt;SetAttributeObject(<span class="hljs-string">"LINE1"</span>,`ALL_BEAMS\CONSTRUCTION\DRW_REF\Ordered Geometrical Set<span class="hljs-number">.33</span>\DRW_INT_LN` )	
+		F-&gt;SetAttributeObject(<span class="hljs-string">"SURF"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Multi-sections Surface<span class="hljs-number">.62</span>`  )
+		F-&gt;SetAttributeString(<span class="hljs-string">"位置设定"</span>,<span class="hljs-string">"小里程边跨"</span>)
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		
+		F-&gt;SetAttributeObject(<span class="hljs-string">"LINE"</span>,ln)
+		F-&gt;SetAttributeObject(<span class="hljs-string">"LINE1"</span>,`ALL_BEAMS\CONSTRUCTION\DRW_REF\Ordered Geometrical Set<span class="hljs-number">.33</span>\DRW_INT_LN` )	
+		F-&gt;SetAttributeObject(<span class="hljs-string">"SURF"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\Multi-sections Surface<span class="hljs-number">.62</span>`  )
+		F-&gt;SetAttributeString(<span class="hljs-string">"位置设定"</span>,<span class="hljs-string">"大里程边跨"</span>)
+	}
+	EndModifyTemplate(F)
+	F.Name=<span class="hljs-string">"GAP_"</span>+i
+	
+	
+}
+
+</div></code></pre>
+<h3 id="%E5%87%BA%E5%9B%BE%E6%A8%A1%E5%9E%8B">出图模型</h3>
+<h4 id="%E6%A2%81%E5%B9%B3%E9%9D%A2%E5%9B%BE">梁平面图</h4>
+<pre class="hljs"><code><div>
+let pt,pt1,pt2(point)
+<span class="hljs-function">let <span class="hljs-title">i</span><span class="hljs-params">(integer)</span>
+let <span class="hljs-title">ln</span><span class="hljs-params">(line)</span>
+let l1,<span class="hljs-title">l2</span><span class="hljs-params">(list)</span>
+let <span class="hljs-title">F</span><span class="hljs-params">(Feature)</span>
+
+l1</span>=Point11
+l2=Point22
+
+i=<span class="hljs-number">1</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt; l1.Size()
+{
+	ln=CreateOrModifyDatum(<span class="hljs-string">"line"</span>,ALL_BEAMS\DATUM\PLANER_LN ,ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_GAP_BEAM\LineList ,i)
+	pt1=pointbetween(l1[i],l1[i+<span class="hljs-number">1</span>],<span class="hljs-number">0.5</span>,<span class="hljs-keyword">false</span>)
+	pt2=pointbetween(l2[i],l2[i+<span class="hljs-number">1</span>],<span class="hljs-number">0.5</span>,<span class="hljs-keyword">false</span>)
+	ln=line(pt1,pt2)
+	ln.Name=<span class="hljs-string">"LN-"</span>+i
+	ln.Update()
+	
+	Set F=CreateOrModifyTemplate(<span class="hljs-string">"DRW_BEAM_P1"</span>,ALL_BEAMS\MODEL\DRW_PLANER_BEAM_GAP ,ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_GAP_BEAM\BeamGapList ,i)
+	F-&gt;SetAttributeObject(<span class="hljs-string">"LN"</span>,ln)
+	F-&gt;SetAttributeObject(<span class="hljs-string">"CRV-1"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">1</span>` )
+	F-&gt;SetAttributeObject(<span class="hljs-string">"CRV-2"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">2</span>` )
+	F-&gt;SetAttributeDimension(<span class="hljs-string">"BEAM_WIDTH"</span>,<span class="hljs-number">300</span>mm,<span class="hljs-string">"LENGTH"</span>)
+	F-&gt;SetAttributeString(<span class="hljs-string">"TYPE"</span>,<span class="hljs-string">"B"</span>)
+	F.Name=<span class="hljs-string">"BEAM-PLANER-"</span>+i
+	<span class="hljs-comment">//F.Color="0,255,255"</span>
+	EndModifyTemplate(F)	
+}
+
+</div></code></pre>
+<h4 id="%E5%8D%95%E7%82%B9%E6%A0%87%E6%B3%A8">单点标注</h4>
+<pre class="hljs"><code><div>
+let pt,pt1(point)
+let i,j,k(integer)
+<span class="hljs-function">let <span class="hljs-title">ln</span><span class="hljs-params">(line)</span>
+let <span class="hljs-title">l1</span><span class="hljs-params">(list)</span>
+<span class="hljs-comment">//</span>
+                let <span class="hljs-title">F</span><span class="hljs-params">(ArcAnnotationOnePointFeature)</span>
+let <span class="hljs-title">F1</span><span class="hljs-params">(ArcAnnotationTwoPointFeature)</span>
+<span class="hljs-comment">//let DEMO1,</span>
+<span class="hljs-comment">//let DEMO2(feature)</span>
+
+l1</span>=ALL_BEAMS\RELATIONS\KP_MODEL\KP_BEAMS\PlanerLnList
+ln=`ALL_BEAMS\CONSTRUCTION\DRW_REF\Ordered Geometrical Set<span class="hljs-number">.33</span>\DRW_INT_LN`
+
+i=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;= l1.Size()
+{
+    pt=CreateOrModifyDatum(<span class="hljs-string">"point"</span>,ALL_BEAMS\DATUM\DRW_POINTS  ,ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_LABEL_POSITION\IntPointList  ,i)
+    pt=intersect(ln,l1[i])
+    pt.Name=<span class="hljs-string">"INT-POINT-"</span>+i	
+}
+j=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> j <span class="hljs-keyword">while</span> j&lt;= l1.Size()
+{
+    <span class="hljs-comment">/*Set F=InstantiateTemplate("DRW_TAG_1",ALL_BEAMS\RESULT\DRW_TAGS )
+    F-&gt;SetAttributeObject("PT",ALL_BEAMS\RELATIONS\KP\KP_DRW_LABEL_POSITION\IntPointList [j])
+    //F-&gt;SetAttributeDimension("BEAM_WIDTH",300mm,"LENGTH")
+    F-&gt;SetAttributeString("ComponentName","demo")
+    F-&gt;SetAttributeString("Name","TEST-"+j)
+    F-&gt;SetAttributeString("Value","K-"+`ALL_BEAMS\PARAMETERS\跨号` +"_"+j+"-号梁")
+    EndModifyTemplate(F)	
+    ALL_BEAMS\RELATIONS\KP\KP_DRW_LABEL_POSITION\LabelList-&gt;SetItem(F-&gt;GetAttributeObject("LABEL"),j)
+    DEMO1=F-&gt;GetAttributeObject("LABEL")
+    
+    DEMO1.Name="Label-"+j
+    */</span>
+    F=CreateArcAnnotationOnePointFeature(`Annotation\梁号标注`  ,ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_LABEL_POSITION\IntPointList [j],<span class="hljs-string">"RTTT"</span>,<span class="hljs-string">"demo"</span>,<span class="hljs-string">"K-"</span>+`ALL_BEAMS\PARAMETERS\跨号` +<span class="hljs-string">"_"</span>+j+<span class="hljs-string">"-号梁"</span>)
+    ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_LABEL_POSITION\LabelList-&gt;SetItem(F,j)
+}
+k=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> k <span class="hljs-keyword">while</span> k&lt; l1.Size()
+{
+    <span class="hljs-comment">/*Set F1=InstantiateTemplate("DRW_DIM_1",ALL_BEAMS\RESULT\DRW_DIM )
+    F1-&gt;SetAttributeObject("P1",ALL_BEAMS\RELATIONS\KP\KP_DRW_LABEL_POSITION\IntPointList [k])
+    F1-&gt;SetAttributeObject("P2",ALL_BEAMS\RELATIONS\KP\KP_DRW_LABEL_POSITION\IntPointList [k+1])
+    F1-&gt;SetAttributeString("Name","Distance-"+k)
+    F1-&gt;SetAttributeInteger("DimType",3)
+    EndModifyTemplate(F1)	
+    ALL_BEAMS\RELATIONS\KP\KP_DRW_LABEL_POSITION\DimListM  -&gt;SetItem(F1-&gt;GetAttributeObject("DIM"),k)
+    DEMO2=F1-&gt;GetAttributeObject("DIM")
+    DEMO2-&gt;SetAttributeString("Value","K-"+k+"-号梁")
+    DEMO2.Name="Dim-M-"+k
+    */</span>
+    F1=CreateArcAnnotationTwoPointFeature(`Annotation\现浇缝隙标注`,ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_LABEL_POSITION\IntPointList [k],ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_LABEL_POSITION\IntPointList [k+<span class="hljs-number">1</span>],<span class="hljs-string">"Distance-"</span>+k,<span class="hljs-string">"K-"</span>+k+<span class="hljs-string">"-号梁"</span>,<span class="hljs-string">"1"</span>)
+    ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_LABEL_POSITION\DimListM  -&gt;SetItem(F1,k)
+}
+
+
+<span class="hljs-comment">//得到两边标注</span>
+k=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> k <span class="hljs-keyword">while</span> k&lt; l1.Size()
+{
+    <span class="hljs-comment">/*
+    Set F1=InstantiateTemplate("DRW_DIM_1",ALL_BEAMS\RESULT\DRW_DIM )
+    F1-&gt;SetAttributeObject("P1",Point11 [k] )
+    F1-&gt;SetAttributeObject("P2",Point11  [k+1])
+    F1-&gt;SetAttributeString("Name","Distance-"+k)
+    F1-&gt;SetAttributeInteger("DimType",3)
+    EndModifyTemplate(F1)	
+    ALL_BEAMS\RELATIONS\KP\KP_DRW_LABEL_POSITION\DimListL -&gt;SetItem(F1-&gt;GetAttributeObject("DIM"),k)
+    DEMO2=F1-&gt;GetAttributeObject("DIM")
+    DEMO2-&gt;SetAttributeString("Value","K-"+k+"-号梁")
+    DEMO2.Name="Dim-L-"+k
+    */</span>
+    F1=CreateArcAnnotationTwoPointFeature(`Annotation\现浇缝小里程标注`,Point11[k],Point11[k+<span class="hljs-number">1</span>],<span class="hljs-string">"Distance-"</span>+k,<span class="hljs-string">"K-"</span>+k+<span class="hljs-string">"-号梁"</span>,<span class="hljs-string">"3"</span>)
+    ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_LABEL_POSITION\DimListL  -&gt;SetItem(F1,k)
+}
+
+<span class="hljs-comment">//得到两边标注</span>
+k=<span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> k <span class="hljs-keyword">while</span> k&lt; l1.Size()
+{
+    <span class="hljs-comment">/*Set F1=InstantiateTemplate("DRW_DIM_1",ALL_BEAMS\RESULT\DRW_DIM )
+    F1-&gt;SetAttributeObject("P1",Point22 [k] )
+    F1-&gt;SetAttributeObject("P2",Point22  [k+1])
+    F1-&gt;SetAttributeString("Name","Distance-"+k)
+    F1-&gt;SetAttributeInteger("DimType",3)
+    EndModifyTemplate(F1)	
+    ALL_BEAMS\RELATIONS\KP\KP_DRW_LABEL_POSITION\DimList -&gt;SetItem(F1-&gt;GetAttributeObject("DIM"),k)
+    DEMO2=F1-&gt;GetAttributeObject("DIM")
+    DEMO2-&gt;SetAttributeString("Value","K-"+k+"-号梁")
+    DEMO2.Name="Dim-R-"+k */</span>
+    
+    F1=CreateArcAnnotationTwoPointFeature(`Annotation\现浇缝大里程标注`,Point22 [k],Point22[k+<span class="hljs-number">1</span>],<span class="hljs-string">"Distance-"</span>+k,<span class="hljs-string">"K-"</span>+k+<span class="hljs-string">"-号梁"</span>,<span class="hljs-string">"3"</span>)
+    ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_LABEL_POSITION\DimList  -&gt;SetItem(F1,k)
+}
+			
+</div></code></pre>
+<h4 id="%E6%A8%AA%E6%96%AD%E9%9D%A2%E5%9B%BE%E7%BA%B8%E6%A8%A1%E6%9D%BF%E7%9A%84%E7%94%9F%E6%88%90">横断面图纸模板的生成</h4>
+<pre class="hljs"><code><div>
+
+let i,j(integer)
+let p1,p2,p3,p4(point)
+let dis1,dis2(LENGTH)
+
+let L1,L2(list)
+L1=Point11
+L2=Point22
+let F1,F2(Feature)
+<span class="hljs-function">let <span class="hljs-title">gap</span><span class="hljs-params">(length)</span>
+gap</span>=`ALL_BEAMS\PARAMETERS\现浇间距`/<span class="hljs-number">2</span>
+i=<span class="hljs-number">1</span>
+j=<span class="hljs-number">1</span>
+
+p1=Point1[<span class="hljs-number">1</span>]
+p2=Point1[<span class="hljs-number">2</span>]
+Notify(<span class="hljs-string">"DIS:"</span>,dis1)
+dis1=distance(p1,p2)
+	
+p3=Point2[<span class="hljs-number">1</span>]
+p4=Point2[<span class="hljs-number">2</span>]
+		
+Notify(<span class="hljs-string">"DIS:"</span>,dis2)
+dis2=distance(p3,p4)
+			
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">while</span> i&lt;=Point11.Size()
+{
+	F1=CreateOrModifyTemplate(<span class="hljs-string">"S1"</span> ,ALL_BEAMS\MODEL\DRW_SECTION_UDFS_P1  ,ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_BEAM_SECTION\BeamSectionList_1   ,i)
+	F1-&gt;SetAttributeObject(<span class="hljs-string">"CRV"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">01</span>` )
+	F1-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>, Point1.GetItem (i))	
+    <span class="hljs-keyword">if</span> i==<span class="hljs-number">1</span>
+    {
+        F1-&gt;SetAttributeDimension(<span class="hljs-string">"Length_L"</span>,<span class="hljs-number">1975</span>mm,<span class="hljs-string">"Length"</span>)
+        F1-&gt;SetAttributeDimension(<span class="hljs-string">"Length_R"</span>,dis1/<span class="hljs-number">2</span>-gap,<span class="hljs-string">"Length"</span>)
+    }
+    <span class="hljs-keyword">if</span> i&gt;<span class="hljs-number">1</span> and i&lt; Point11.Size()
+    {
+        F1-&gt;SetAttributeDimension(<span class="hljs-string">"Length_L"</span>,dis1/<span class="hljs-number">2</span>-gap,<span class="hljs-string">"Length"</span>)
+        F1-&gt;SetAttributeDimension(<span class="hljs-string">"Length_R"</span>,dis1/<span class="hljs-number">2</span>-gap,<span class="hljs-string">"Length"</span>)				
+    }
+    <span class="hljs-keyword">if</span> i==Point11.Size()
+    {
+        F1-&gt;SetAttributeDimension(<span class="hljs-string">"Length_L"</span>,dis1/<span class="hljs-number">2</span>-gap,<span class="hljs-string">"Length"</span>)
+        F1-&gt;SetAttributeDimension(<span class="hljs-string">"Length_R"</span>,<span class="hljs-number">1975</span>mm,<span class="hljs-string">"Length"</span>)
+    }
+	EndModifyTemplate(F1)
+
+
+	F2=CreateOrModifyTemplate(<span class="hljs-string">"S1"</span> ,ALL_BEAMS\MODEL\DRW_SECTION_UDFS_P2  ,ALL_BEAMS\RELATIONS\KP_DRW\KP_DRW_BEAM_SECTION\BeamSectionList_2   ,i)
+	F2-&gt;SetAttributeObject(<span class="hljs-string">"CRV"</span>,`ALL_BEAMS\CONSTRUCTION\CONSTRUCTION\CRV-<span class="hljs-number">02</span>` )
+	F2-&gt;SetAttributeObject(<span class="hljs-string">"PT"</span>, Point2 .GetItem (i))
+
+     <span class="hljs-keyword">if</span> i==<span class="hljs-number">1</span>
+    {
+        F2-&gt;SetAttributeDimension(<span class="hljs-string">"Length_L"</span>,<span class="hljs-number">1975</span>mm,<span class="hljs-string">"Length"</span>)
+        F2-&gt;SetAttributeDimension(<span class="hljs-string">"Length_R"</span>,dis2/<span class="hljs-number">2</span>-gap,<span class="hljs-string">"Length"</span>)
+    }
+    <span class="hljs-keyword">if</span> i&gt;<span class="hljs-number">1</span> and i&lt; Point11.Size()
+    {
+        F2-&gt;SetAttributeDimension(<span class="hljs-string">"Length_L"</span>,dis2/<span class="hljs-number">2</span>-gap,<span class="hljs-string">"Length"</span>)
+        F2-&gt;SetAttributeDimension(<span class="hljs-string">"Length_R"</span>,dis2/<span class="hljs-number">2</span>-gap,<span class="hljs-string">"Length"</span>)				
+    }
+    <span class="hljs-keyword">if</span> i==Point11.Size()
+    {
+        F2-&gt;SetAttributeDimension(<span class="hljs-string">"Length_L"</span>,dis2/<span class="hljs-number">2</span>-gap,<span class="hljs-string">"Length"</span>)
+        F2-&gt;SetAttributeDimension(<span class="hljs-string">"Length_R"</span>,<span class="hljs-number">1975</span>mm,<span class="hljs-string">"Length"</span>)
+    }
+	EndModifyTemplate(F2)
+}
+
+</div></code></pre>
+<h3 id="%E6%A2%81%E6%95%B0%E9%87%8F%E8%AE%A1%E7%AE%97%E5%99%A8">梁数量计算器</h3>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BrdLogical::mainLoop</span><span class="hljs-params">(<span class="hljs-keyword">double</span> brd_width)</span>
+</span>{
+
+	<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"开始计算!\n"</span>;
+
+	<span class="hljs-keyword">double</span> B = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> maxgap = <span class="hljs-number">4300</span>;<span class="hljs-comment">//最大梁距</span>
+	<span class="hljs-keyword">double</span> mingap = <span class="hljs-number">3000</span>;<span class="hljs-comment">//最小梁距</span>
+	<span class="hljs-keyword">double</span> stdgap = <span class="hljs-number">300</span>;<span class="hljs-comment">//现浇段距离</span>
+	<span class="hljs-keyword">double</span> stdLength = <span class="hljs-number">4250</span>;<span class="hljs-comment">//标准梁距离</span>
+	<span class="hljs-keyword">double</span> DS0 = <span class="hljs-number">1975</span>;<span class="hljs-comment">//边梁外侧宽</span>
+	<span class="hljs-keyword">double</span> guardrailwidth = <span class="hljs-number">150</span>;<span class="hljs-comment">//防撞护栏外包宽</span>
+	<span class="hljs-keyword">double</span> beamTF = <span class="hljs-number">0</span>;<span class="hljs-comment">//是否处于少梁状态</span>
+	<span class="hljs-keyword">double</span> NB = <span class="hljs-number">0</span>; <span class="hljs-comment">//梁数（初始）</span>
+	<span class="hljs-keyword">double</span> DT = <span class="hljs-number">0.0</span>;<span class="hljs-comment">//两侧边梁中心距</span>
+	<span class="hljs-keyword">double</span> beamdistance = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> beamdis3 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> beamdis4_3 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> beamdisTF = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> NB2 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> DL2 = <span class="hljs-number">0.0</span>;
+	<span class="hljs-keyword">double</span> DL3 = <span class="hljs-number">0.000</span>;<span class="hljs-comment">//梁距（修正3）</span>
+
+
+
+
+	<span class="hljs-comment">//B = i*500;</span>
+	B = brd_width;
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">""</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"桥宽="</span> &lt;&lt; B &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	DT = B - <span class="hljs-number">2</span> * guardrailwidth - <span class="hljs-number">2</span> * DS0;
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----两侧边梁中心距="</span> &lt;&lt; DT &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁数最小值（估算）；</span>
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">int</span>(B / maxgap) &lt; <span class="hljs-number">2</span>)
+	{
+		beamdistance = <span class="hljs-number">2</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamdistance = (<span class="hljs-keyword">int</span>(B / maxgap));
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数最小值（估算）="</span> &lt;&lt; beamdistance &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁数最大值（估算）</span>
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">int</span>(B / mingap) &lt; <span class="hljs-number">2</span>)
+	{
+		beamdistance = <span class="hljs-number">2</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamdistance = (<span class="hljs-keyword">int</span>(B / mingap));
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数最大值（估算）="</span> &lt;&lt; beamdistance &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//***************************************</span>
+	<span class="hljs-comment">//**此循环判定是否处于少梁状态（很窄）</span>
+	<span class="hljs-comment">//***************************************</span>
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----**此循环判定是否处于少梁状态（很窄）**"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//是否处于少梁状态</span>
+	<span class="hljs-keyword">if</span> (DT &lt; stdLength)
+	{
+		beamTF = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamTF = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----是否处于少梁状态="</span> &lt;&lt; beamTF &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁数（初始）</span>
+	NB = <span class="hljs-keyword">int</span>(DT / stdLength);
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（初始）="</span> &lt;&lt; NB &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁数（修正1）</span>
+	<span class="hljs-keyword">if</span> (beamTF == <span class="hljs-number">1</span>)
+	{
+		NB = NB + <span class="hljs-number">2</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		NB = NB + <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（修正1）="</span> &lt;&lt; NB &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-comment">//梁距（修正1）</span>
+	beamdistance = DT / (NB - <span class="hljs-number">1</span>);
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距（修正1）="</span> &lt;&lt; beamdistance &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+
+	<span class="hljs-comment">//梁距判定 &gt;=3.0</span>
+	<span class="hljs-keyword">if</span> (beamdistance &gt;= mingap)
+	{
+		beamdis3 = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamdis3 = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-comment">//**********************</span>
+	<span class="hljs-comment">//**此循环判定梁距是否合理</span>
+	<span class="hljs-comment">//**********************</span>
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----**此循环判定梁距是否合理**"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距判定 &gt;=3.0="</span> &lt;&lt; beamdis3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁距判定 &lt;=4.3</span>
+	<span class="hljs-keyword">if</span> (beamdistance &lt;= maxgap)
+	{
+		beamdis4_3 = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamdis4_3 = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距判定 &lt;=4.3="</span> &lt;&lt; beamdis4_3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁距是否合理</span>
+	<span class="hljs-keyword">if</span> (beamdis3 * beamdis4_3 == <span class="hljs-number">1</span>)
+	{
+		beamdisTF = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamdisTF = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距是否合理="</span> &lt;&lt; beamdisTF &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+
+	<span class="hljs-comment">//梁数（修正2）</span>
+	<span class="hljs-keyword">if</span> (beamdisTF == <span class="hljs-number">1</span>)
+	{
+		NB2 = NB;
+
+	}
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (beamdis3 == <span class="hljs-number">0</span>)
+	{
+		<span class="hljs-keyword">if</span> (beamdistance &lt; mingap)
+		{
+			NB2 = NB;
+
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			NB2 = NB - <span class="hljs-number">1</span>;
+		}
+	}
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (beamdis4_3 == <span class="hljs-number">0</span>)
+	{
+		NB2 = NB + <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（修正2）="</span> &lt;&lt; NB2 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁距（修正2）</span>
+	DL2 = DT / (NB2 - <span class="hljs-number">1</span>);
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距（修正2）="</span> &lt;&lt; DL2 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//**********************</span>
+	<span class="hljs-comment">//**此循环判定边梁外侧宽是否需调整</span>
+	<span class="hljs-comment">//**********************</span>
+
+	<span class="hljs-comment">//梁距判定 &gt;= 3.0</span>
+	<span class="hljs-keyword">int</span> beamDisCheck2_3 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (DL2 &gt; mingap)
+	{
+		beamDisCheck2_3 = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span> {
+		beamDisCheck2_3 = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----**此循环判定边梁外侧宽是否需调整**"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距判定 &gt;= 3.0="</span> &lt;&lt; beamDisCheck2_3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁距判定 &lt;= 4.3</span>
+	<span class="hljs-keyword">int</span> beamDisCheck2_4_3 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (DL2 &lt;= maxgap)
+	{
+		beamDisCheck2_4_3 = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamDisCheck2_4_3 = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距判定 &lt;= 4.3="</span> &lt;&lt; beamDisCheck2_4_3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//梁距是否合理</span>
+	<span class="hljs-keyword">int</span> beamdisTF2 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (beamDisCheck2_3 * beamDisCheck2_4_3 == <span class="hljs-number">1</span>)
+	{
+		beamdisTF2 = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamdisTF2 = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距是否合理="</span> &lt;&lt; beamdisTF2 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+
+	<span class="hljs-keyword">if</span> (beamDisCheck2_3 == <span class="hljs-number">1</span>)
+	{
+		DL3 = DL2;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		DL3 = B / NB2;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距（修正3）="</span> &lt;&lt; DL3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//边梁外侧宽（修正1）</span>
+	<span class="hljs-keyword">double</span> DS01 = <span class="hljs-number">0</span>;
+	DS01 = (B - (<span class="hljs-number">2</span> * guardrailwidth) - (NB2 - <span class="hljs-number">1</span>) * DL3) / <span class="hljs-number">2</span>;
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----边梁外侧宽（修正1）="</span> &lt;&lt; DS01 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"\n"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"计算结束!\n"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BrdLogical::GetCount</span><span class="hljs-params">(<span class="hljs-keyword">double</span> BW ,<span class="hljs-keyword">int</span> &amp;A,<span class="hljs-keyword">int</span> &amp;B )</span>
+</span>{
+	<span class="hljs-comment">//declare variables;</span>
+	<span class="hljs-keyword">double</span> minLength = <span class="hljs-number">3.000</span>;
+	<span class="hljs-keyword">double</span> maxLength = <span class="hljs-number">4.300</span>;
+	<span class="hljs-keyword">double</span> stdLength = <span class="hljs-number">4.250</span>;
+
+	<span class="hljs-keyword">double</span> DT = <span class="hljs-number">0.000</span>;
+	<span class="hljs-keyword">double</span> DL1 = <span class="hljs-number">0.000</span>;
+
+
+	MaxCount = <span class="hljs-keyword">int</span>(BW / minLength);
+	<span class="hljs-keyword">if</span> (MaxCount &lt; <span class="hljs-number">2</span>)
+	{
+		MaxCount = <span class="hljs-number">2</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		MaxCount = <span class="hljs-keyword">int</span>(BW / minLength);
+	}
+	MinCount = <span class="hljs-keyword">int</span>(BW / maxLength);
+	<span class="hljs-keyword">if</span> (MinCount &lt; <span class="hljs-number">2</span>)
+	{
+		MinCount = <span class="hljs-number">2</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		MinCount = <span class="hljs-keyword">int</span>(BW / maxLength);
+	}
+
+	DT = BW - (<span class="hljs-number">1.975</span> * <span class="hljs-number">2</span> + <span class="hljs-number">0.150</span> * <span class="hljs-number">2</span>);
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----两侧边梁中心距="</span> &lt;&lt; DT &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-keyword">if</span> (DT &lt; stdLength)
+	{
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距不满足一个标准梁4.25米的距离。"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+		<span class="hljs-comment">//计算初始值</span>
+		Bcount = (DT / stdLength) + <span class="hljs-number">2</span>;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（修正1）="</span> &lt;&lt; Bcount &lt;&lt; <span class="hljs-built_in">endl</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		<span class="hljs-comment">//计算初始值</span>
+		Bcount = (DT / stdLength) + <span class="hljs-number">1</span>;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（修正1）="</span> &lt;&lt; Bcount &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		DL1 = DT / (Bcount - <span class="hljs-number">1</span>);
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距DL1="</span> &lt;&lt; DL1 &lt;&lt; <span class="hljs-built_in">endl</span>;
+	}
+
+	<span class="hljs-comment">//纠正</span>
+	 <span class="hljs-keyword">if</span> (DL1 &lt; minLength)
+	{
+		 Bcount = (DT / stdLength) + <span class="hljs-number">2</span>;
+	}
+	 <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (DL1 &gt; minLength &amp;&amp; DL1 &lt;= maxLength)
+	{
+		 Bcount = (DT / stdLength) + <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (DL1 &gt;= maxLength)
+	{
+		Bcount = Bcount + <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（修正2）="</span> &lt;&lt; Bcount &lt;&lt; <span class="hljs-built_in">endl</span>;
+	A = Bcount;
+	<span class="hljs-comment">//梁数最大值（估算）的 梁距</span>
+	<span class="hljs-keyword">double</span> MaxBeamLength = <span class="hljs-number">0</span>;
+	MaxBeamLength = DT / (MaxCount - <span class="hljs-number">1</span>);
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数最大值（估算）的 梁距 = "</span> &lt;&lt; MaxBeamLength &lt;&lt; <span class="hljs-built_in">endl</span>;
+	
+	<span class="hljs-comment">//梁数最大值（取用 试算1）</span>
+	<span class="hljs-keyword">double</span> MaxBeamCount = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (MaxBeamLength&gt;minLength &amp;&amp; MaxBeamLength&lt;=maxLength)
+	{
+		MaxBeamCount = MaxCount;<span class="hljs-comment">// (DT / stdLength) + 2;</span>
+		<span class="hljs-comment">//cout &lt;&lt; "-----梁数最大值[if (MaxBeamLength&lt;minLength)]（取用 试算1）=" &lt;&lt; MaxBeamCount &lt;&lt; endl;</span>
+	} 
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(MaxCount<span class="hljs-number">-1</span>&gt;= Bcount)
+	{
+		MaxBeamCount = MaxCount<span class="hljs-number">-1</span>;
+		<span class="hljs-comment">//cout &lt;&lt; "-----梁数最大值[(MaxCount-1&gt;= Bcount)]（取用 试算1）=" &lt;&lt; MaxBeamCount &lt;&lt; endl;</span>
+	}
+	<span class="hljs-keyword">else</span> 
+	{
+		MaxBeamCount = Bcount;
+		<span class="hljs-comment">//cout &lt;&lt; "-----梁数最大值[else]（取用 试算1）=" &lt;&lt; MaxBeamCount &lt;&lt; endl;</span>
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数最大值（取用 试算1）="</span> &lt;&lt; MaxBeamCount &lt;&lt; <span class="hljs-built_in">endl</span>;
+	B = MaxBeamCount;
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BrdLogical::Compare</span><span class="hljs-params">(<span class="hljs-keyword">double</span> P1Length, <span class="hljs-keyword">double</span> P2Length, <span class="hljs-keyword">int</span>&amp; oCount)</span>
+</span>{
+	BrdLogical aa;
+	<span class="hljs-comment">// P1</span>
+	<span class="hljs-keyword">int</span> CountA = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">int</span> CountB = <span class="hljs-number">0</span>;
+	aa.GetCount(P1Length, CountA, CountB);
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----最终P1：="</span> &lt;&lt; <span class="hljs-string">"桥宽："</span> &lt;&lt; P1Length &lt;&lt; <span class="hljs-string">"_"</span> &lt;&lt; <span class="hljs-string">"A:"</span> &lt;&lt; CountA &lt;&lt; <span class="hljs-string">"_"</span> &lt;&lt; <span class="hljs-string">"B:"</span> &lt;&lt; CountB &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-comment">// P2</span>
+	<span class="hljs-keyword">int</span> Counta = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">int</span> Countb = <span class="hljs-number">0</span>;
+	aa.GetCount(P2Length, Counta, Countb);
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----最终P2：="</span> &lt;&lt; <span class="hljs-string">"桥宽："</span> &lt;&lt; P2Length &lt;&lt; <span class="hljs-string">"_"</span> &lt;&lt; <span class="hljs-string">"A:"</span> &lt;&lt; Counta &lt;&lt; <span class="hljs-string">"_"</span> &lt;&lt; <span class="hljs-string">"B:"</span> &lt;&lt; Countb &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+	<span class="hljs-comment">//交集的类型 1（小里程最小梁数&lt;大里程最小梁数）</span>
+	<span class="hljs-keyword">int</span> type1 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (CountA &lt; Counta &amp;&amp; CountB &gt;= Counta)
+	{
+		type1 = <span class="hljs-number">1</span>;
+	} 
+	<span class="hljs-keyword">else</span>
+	{
+		type1 = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----交集的类型 1（小里程最小梁数&lt;大里程最小梁数）："</span> &lt;&lt; type1 &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-comment">//交集的类型 2（小里程最小梁数&gt;=大里程最小梁数）</span>
+	<span class="hljs-keyword">int</span> type2 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (CountA &gt;= Counta &amp;&amp; CountA &gt;= Countb)
+	{
+		type2 = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		type2 = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----交集的类型 2（小里程最小梁数&gt;=大里程最小梁数）："</span> &lt;&lt; type2 &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+	<span class="hljs-comment">//梁数 是否有交集</span>
+	<span class="hljs-keyword">int</span> beamintbool = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (type1==<span class="hljs-number">0</span> &amp;&amp; type2==<span class="hljs-number">0</span>)
+	{
+		beamintbool = <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		beamintbool = <span class="hljs-number">1</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数 是否有交集："</span> &lt;&lt; beamintbool &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+	<span class="hljs-comment">//如有交集 梁数（取公有数的最小值）</span>
+
+	<span class="hljs-keyword">int</span> beamGetMin = <span class="hljs-number">0</span>;
+
+	<span class="hljs-keyword">if</span> (type1==<span class="hljs-number">1</span>)
+	{
+		beamGetMin = Counta;
+	} 
+	<span class="hljs-keyword">else</span>
+	{
+		<span class="hljs-keyword">if</span> (type1==<span class="hljs-number">0</span>)
+		{
+			beamGetMin = CountA;
+		}
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数 如有交集 梁数（取公有数的最小值）："</span> &lt;&lt; beamGetMin &lt;&lt; <span class="hljs-built_in">endl</span>;
+	
+	<span class="hljs-comment">// 如无交集 梁数（取四个数中，第二大的那个数）推荐</span>
+	<span class="hljs-keyword">int</span> noInterVal = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (beamintbool==<span class="hljs-number">0</span>)
+	{
+		<span class="hljs-keyword">if</span> (CountA&lt;Counta)
+		{
+			noInterVal = Counta;
+		} 
+		<span class="hljs-keyword">else</span>
+		{
+			noInterVal = CountA;
+		}
+	} 
+	<span class="hljs-keyword">else</span>
+	{
+		noInterVal = beamGetMin;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数  查看有交集解："</span> &lt;&lt; noInterVal &lt;&lt; <span class="hljs-built_in">endl</span>;
+	}
+	
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数  如无交集 梁数（取四个数中，第二大的那个数）推荐："</span> &lt;&lt; noInterVal &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+	<span class="hljs-comment">//noInterVal 为最终解</span>
+
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+	<span class="hljs-comment">//如无交集 需修改桥宽的一侧</span>
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+	<span class="hljs-keyword">int</span> NoBeamCheck = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (beamintbool==<span class="hljs-number">0</span>)
+	{
+		<span class="hljs-keyword">if</span> (CountA&lt; Counta)
+		{
+			<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数  调节小里程侧 "</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数  调节大里程侧 "</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+		}
+	} 
+	<span class="hljs-keyword">else</span>
+	{
+		NoBeamCheck = noInterVal;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数  查看有交集解 "</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+	}
+
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+	<span class="hljs-comment">//	如无交集 需修改桥宽的一侧 桥宽推荐</span>
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+
+	<span class="hljs-keyword">int</span> beamFixVal = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (beamintbool == <span class="hljs-number">1</span>)
+	{
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数  查看有交集解 "</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+	}
+	<span class="hljs-keyword">else</span>
+	{
+
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数  桥宽推荐 "</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+	}
+
+	<span class="hljs-comment">//以下为其他算法计算结果，可以参考，可以删除；</span>
+
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+	<span class="hljs-keyword">int</span> sresult = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">if</span> (type1==<span class="hljs-number">1</span>)
+	{
+		sresult = Counta;
+	} 
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( type2==<span class="hljs-number">1</span>)
+	{
+		sresult = CountA;
+	}
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (beamintbool ==<span class="hljs-number">1</span>)
+	{
+		<span class="hljs-keyword">if</span> (CountA&lt;Counta)
+		{
+			sresult = Counta;
+		} 
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(CountA&gt;Counta)
+		{
+			sresult = CountA;
+		}
+	} 
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (beamintbool == <span class="hljs-number">0</span>)
+	{
+		<span class="hljs-keyword">if</span> (CountA&lt;Counta)
+		{
+			sresult = Counta;
+		} 
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(CountA &gt; Counta)
+		{
+			sresult = CountA;
+		}
+	}
+	<span class="hljs-keyword">else</span>
+	{
+
+		<span class="hljs-comment">////----------------------------------------------------------------------</span>
+		<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;dArr;
+		dArr.push_back(CountA);
+		dArr.push_back(CountB);
+		dArr.push_back(Counta);
+		dArr.push_back(Countb);
+		<span class="hljs-keyword">int</span> icoutt = GetSmallNumber(dArr);
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"最终梁得数量为:"</span> &lt;&lt; icoutt &lt;&lt; <span class="hljs-built_in">endl</span>;
+		<span class="hljs-comment">//////----------------------------------------------------------------------</span>
+		oCount = icoutt;
+	}
+	
+	oCount = sresult;
+
+
+
+	<span class="hljs-comment">////----------------------------------------------------------------------</span>
+	<span class="hljs-comment">//vector&lt;int&gt;dArr;</span>
+	<span class="hljs-comment">//dArr.push_back(CountA);</span>
+	<span class="hljs-comment">//dArr.push_back(CountB);</span>
+	<span class="hljs-comment">//dArr.push_back(Counta);</span>
+	<span class="hljs-comment">//dArr.push_back(Countb);</span>
+	<span class="hljs-comment">//int icoutt = GetSmallNumber(dArr);</span>
+	<span class="hljs-comment">//cout &lt;&lt; "最终梁得数量为:" &lt;&lt; icoutt &lt;&lt; endl;</span>
+	<span class="hljs-comment">//////----------------------------------------------------------------------</span>
+	<span class="hljs-comment">//oCount = icoutt;</span>
+
+
+	<span class="hljs-comment">//----------------------------------------------------------------------</span>
+	
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BrdLogical::run</span><span class="hljs-params">()</span>
+</span>{
+
+	<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"开始计算!\n"</span>;
+
+	<span class="hljs-keyword">double</span> B = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> maxgap = <span class="hljs-number">4300</span>;<span class="hljs-comment">//最大梁距</span>
+	<span class="hljs-keyword">double</span> mingap = <span class="hljs-number">3000</span>;<span class="hljs-comment">//最小梁距</span>
+	<span class="hljs-keyword">double</span> stdgap = <span class="hljs-number">300</span>;<span class="hljs-comment">//现浇段距离</span>
+	<span class="hljs-keyword">double</span> stdLength = <span class="hljs-number">4250</span>;<span class="hljs-comment">//标准梁距离</span>
+	<span class="hljs-keyword">double</span> DS0 = <span class="hljs-number">1975</span>;<span class="hljs-comment">//边梁外侧宽</span>
+	<span class="hljs-keyword">double</span> guardrailwidth = <span class="hljs-number">150</span>;<span class="hljs-comment">//防撞护栏外包宽</span>
+	<span class="hljs-keyword">double</span> beamTF = <span class="hljs-number">0</span>;<span class="hljs-comment">//是否处于少梁状态</span>
+	<span class="hljs-keyword">double</span> NB = <span class="hljs-number">0</span>; <span class="hljs-comment">//梁数（初始）</span>
+	<span class="hljs-keyword">double</span> DT = <span class="hljs-number">0.0</span>;<span class="hljs-comment">//两侧边梁中心距</span>
+	<span class="hljs-keyword">double</span> beamCount = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> beamdis3 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> beamdis4_3 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> beamdisTF = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> NB2 = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">double</span> DL2 = <span class="hljs-number">0.0</span>;
+	<span class="hljs-keyword">double</span> DL3 = <span class="hljs-number">0.000</span>;<span class="hljs-comment">//梁距（修正3）</span>
+
+
+
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">150</span>; i++)
+	{
+		B = i * <span class="hljs-number">500</span>;
+	
+
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">""</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"桥宽="</span> &lt;&lt; B &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		DT = B - <span class="hljs-number">2</span> * guardrailwidth - <span class="hljs-number">2</span> * DS0;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----两侧边梁中心距="</span> &lt;&lt; DT &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//梁数最小值（估算）；</span>
+		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">int</span>(B / maxgap) &lt; <span class="hljs-number">2</span>)
+		{
+			beamCount = <span class="hljs-number">2</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			beamCount = (<span class="hljs-keyword">int</span>(B / maxgap));
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数最小值（估算）="</span> &lt;&lt; beamCount &lt;&lt; <span class="hljs-built_in">endl</span>;
+	
+		<span class="hljs-comment">//梁数最大值（估算）</span>
+		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">int</span>(B / mingap) &lt; <span class="hljs-number">2</span>)
+		{
+			beamCount = <span class="hljs-number">2</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			beamCount = (<span class="hljs-keyword">int</span>(B / mingap));
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数最大值（估算）="</span> &lt;&lt; beamCount &lt;&lt; <span class="hljs-built_in">endl</span>;
+		
+		<span class="hljs-comment">//***************************************</span>
+		<span class="hljs-comment">//**此循环判定是否处于少梁状态（很窄）</span>
+		<span class="hljs-comment">//***************************************</span>
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----**此循环判定是否处于少梁状态（很窄）**"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//是否处于少梁状态</span>
+		<span class="hljs-keyword">if</span> (DT &lt; stdLength)
+		{
+			beamTF = <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			beamTF = <span class="hljs-number">0</span>;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----是否处于少梁状态 ="</span> &lt;&lt; beamTF &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//梁数（初始）</span>
+		NB = <span class="hljs-keyword">int</span>(DT / stdLength);
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（初始）="</span> &lt;&lt; NB &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//梁数（修正1）</span>
+		<span class="hljs-keyword">if</span> (beamTF == <span class="hljs-number">1</span>)
+		{
+			NB = NB + <span class="hljs-number">2</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			NB = NB + <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（修正1）="</span> &lt;&lt; NB &lt;&lt; <span class="hljs-built_in">endl</span>;
+		<span class="hljs-comment">//梁距（修正1）</span>
+		beamCount = DT / (NB - <span class="hljs-number">1</span>);
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距（修正1）="</span> &lt;&lt; beamCount &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+
+		<span class="hljs-comment">//梁距判定 &gt;=3.0</span>
+		<span class="hljs-keyword">if</span> (beamCount &gt;= mingap)
+		{
+			beamdis3 = <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			beamdis3 = <span class="hljs-number">0</span>;
+		}
+		<span class="hljs-comment">//**********************</span>
+		<span class="hljs-comment">//**此循环判定梁距是否合理</span>
+		<span class="hljs-comment">//**********************</span>
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----**此循环判定梁距是否合理**"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距判定 &gt;=3.0="</span> &lt;&lt; beamdis3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//梁距判定 &lt;=4.3</span>
+		<span class="hljs-keyword">if</span> (beamCount &lt;= maxgap)
+		{
+			beamdis4_3 = <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			beamdis4_3 = <span class="hljs-number">0</span>;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距判定 &lt;=4.3="</span> &lt;&lt; beamdis4_3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//梁距是否合理</span>
+		<span class="hljs-keyword">if</span> (beamdis3 * beamdis4_3 == <span class="hljs-number">1</span>)
+		{
+			beamdisTF = <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			beamdisTF = <span class="hljs-number">0</span>;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距是否合理="</span> &lt;&lt; beamdisTF &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+
+		<span class="hljs-comment">//梁数（修正2）</span>
+		<span class="hljs-keyword">if</span> (beamdisTF == <span class="hljs-number">1</span>)
+		{
+			NB2 = NB;
+
+		}
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (beamdis3 == <span class="hljs-number">0</span>)
+		{
+			<span class="hljs-keyword">if</span> (beamCount &lt; mingap)
+			{
+				NB2 = NB;
+
+			}
+			<span class="hljs-keyword">else</span>
+			{
+				NB2 = NB - <span class="hljs-number">1</span>;
+			}
+		}
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (beamdis4_3 == <span class="hljs-number">0</span>)
+		{
+			NB2 = NB + <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁数（修正2）="</span> &lt;&lt; NB2 &lt;&lt; <span class="hljs-built_in">endl</span>;
+	
+
+		<span class="hljs-comment">//梁距（修正2）</span>
+		DL2 = DT / (NB2 - <span class="hljs-number">1</span>);
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距（修正2）="</span> &lt;&lt; DL2 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//**********************</span>
+		<span class="hljs-comment">//**此循环判定边梁外侧宽是否需调整</span>
+		<span class="hljs-comment">//**********************</span>
+
+		<span class="hljs-comment">//梁距判定 &gt;= 3.0</span>
+		<span class="hljs-keyword">int</span> beamDisCheck2_3 = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">if</span> (DL2 &gt; mingap)
+		{
+			beamDisCheck2_3 = <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-keyword">else</span> {
+			beamDisCheck2_3 = <span class="hljs-number">0</span>;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----**此循环判定边梁外侧宽是否需调整**"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距判定 &gt;= 3.0="</span> &lt;&lt; beamDisCheck2_3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//梁距判定 &lt;= 4.3</span>
+		<span class="hljs-keyword">int</span> beamDisCheck2_4_3 = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">if</span> (DL2 &lt;= maxgap)
+		{
+			beamDisCheck2_4_3 = <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			beamDisCheck2_4_3 = <span class="hljs-number">0</span>;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距判定 &lt;= 4.3="</span> &lt;&lt; beamDisCheck2_4_3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//梁距是否合理</span>
+		<span class="hljs-keyword">int</span> beamdisTF2 = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">if</span> (beamDisCheck2_3 * beamDisCheck2_4_3 == <span class="hljs-number">1</span>)
+		{
+			beamdisTF2 = <span class="hljs-number">1</span>;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			beamdisTF2 = <span class="hljs-number">0</span>;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距是否合理="</span> &lt;&lt; beamdisTF2 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+
+		<span class="hljs-keyword">if</span> (beamDisCheck2_3 == <span class="hljs-number">1</span>)
+		{
+			DL3 = DL2;
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			DL3 = B / NB2;
+		}
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----梁距（修正3）="</span> &lt;&lt; DL3 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+		<span class="hljs-comment">//边梁外侧宽（修正1）</span>
+		<span class="hljs-keyword">double</span> DS01 = <span class="hljs-number">0</span>;
+		DS01 = (B - (<span class="hljs-number">2</span> * guardrailwidth) - (NB2 - <span class="hljs-number">1</span>) * DL3) / <span class="hljs-number">2</span>;
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-----边梁外侧宽（修正1）="</span> &lt;&lt; DS01 &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+
+		<span class="hljs-comment">//梁数最小值（估算）的 梁距</span>
+
+
+
+	}
+
+
+	<span class="hljs-comment">//cout &lt;&lt; "_groupMaxCount 数组的数量是：" &lt;&lt; _groupMaxCount.Size() &lt;&lt; endl;</span>
+	<span class="hljs-comment">//cout &lt;&lt; "_groupMinCount 数组的数量是：" &lt;&lt; _groupMinCount.Size() &lt;&lt; endl;</span>
+
+
+
+
+
+
+
+
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"\n"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"计算结束!\n"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">BrdLogical::sortFun</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; p1, <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; p2)</span>
+</span>{
+	<span class="hljs-keyword">return</span> p1 &lt; p2;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">BrdLogical::GetSmallNumber</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; dArr)</span>
+</span>{
+	<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; dArrVec;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; dArr.size(); i++)
+	{
+		<span class="hljs-keyword">int</span> dOne = dArr[i];
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; dArr.size(); j++)
+		{
+			<span class="hljs-keyword">if</span> (dOne == dArr[j])
+			{
+				dArrVec.push_back(dOne);
+				<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"ONE:"</span> &lt;&lt; dOne &lt;&lt; <span class="hljs-built_in">endl</span>;
+			}
+		}
+	}
+
+	sort(dArrVec.begin(), dArrVec.end(), sortFun);
+	<span class="hljs-keyword">if</span> (dArrVec.size() &lt;= <span class="hljs-number">0</span>)
+	{
+		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; dArrVec[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-built_in">endl</span>;
+	<span class="hljs-keyword">return</span> dArrVec[<span class="hljs-number">0</span>];
+}
+
+</div></code></pre>
+
+</body>
+</html>
