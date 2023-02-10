@@ -7317,105 +7317,105 @@ End Function
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kd">Option</span><span class="w"> </span><span class="kd">Explicit</span><span class="w"> </span><span class="kd">Off</span>
+<div class="highlight"><pre><span></span><code>Option Explicit Off
 
-<span class="k">Imports</span><span class="w"> </span><span class="nn">CATOpnsMeasureIDL</span>
+Imports CATOpnsMeasureIDL
 
-<span class="k">Module</span><span class="w"> </span><span class="nn">GeneratateAnimation</span>
+Module GeneratateAnimation
 
-<span class="k">Sub</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
-<span class="w">    </span><span class="n">GenerateAnimation</span><span class="p">()</span>
-<span class="k">End</span><span class="w"> </span><span class="k">Sub</span>
+Sub Main()
+    GenerateAnimation()
+End Sub
 
 
-<span class="k">Public</span><span class="w"> </span><span class="n">ParamSelected</span><span class="p">,</span><span class="w"> </span><span class="n">SectionSelected</span><span class="p">,</span><span class="w"> </span><span class="n">CurveSelected</span>
-<span class="k">Public</span><span class="w"> </span><span class="n">SectionCoords</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
-<span class="k">Public</span><span class="w"> </span><span class="n">catia</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="n">INFITF</span><span class="p">.</span><span class="n">Application</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetObject</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CATIA.Application&quot;</span><span class="p">)</span>
+Public ParamSelected, SectionSelected, CurveSelected
+Public SectionCoords(11)
+Public catia As INFITF.Application = GetObject(&quot;&quot;, &quot;CATIA.Application&quot;)
 
-<span class="k">Sub</span><span class="w"> </span><span class="nf">GenerateAnimation</span><span class="p">()</span>
+Sub GenerateAnimation()
 
-<span class="w">    </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveWindow</span><span class="p">.</span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span>
-<span class="w">    </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveWindow</span><span class="p">.</span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span>
+    catia.ActiveWindow.Height = 2000
+    catia.ActiveWindow.Width = 3000
 
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">TempCoords</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+    Dim TempCoords(11)
 
-<span class="w">    </span><span class="c">&#39;Set Temp = CATIA.ActiveWindow.ActiveViewer</span>
-<span class="w">    </span><span class="n">TempCrv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveEditor</span><span class="p">.</span><span class="n">Selection</span><span class="p">.</span><span class="n">Item</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">Value</span>
-<span class="w">    </span><span class="n">CurrentPart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ContainingPart</span><span class="p">(</span><span class="n">TempCrv</span><span class="p">)</span>
-<span class="w">    </span><span class="n">TempSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">HybridBodies</span><span class="p">.</span><span class="n">Add</span><span class="p">()</span>
+    &#39;Set Temp = CATIA.ActiveWindow.ActiveViewer
+    TempCrv = catia.ActiveEditor.Selection.Item(1).Value
+    CurrentPart = ContainingPart(TempCrv)
+    TempSet = CurrentPart.HybridBodies.Add()
 
-<span class="w">    </span><span class="n">TempSet</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ANIMATION_GEOMETRY&quot;</span>
-<span class="w">    </span><span class="c">&#39;***************************  CREATE REFERENCE POINT ******************************</span>
+    TempSet.Name = &quot;ANIMATION_GEOMETRY&quot;
+    &#39;***************************  CREATE REFERENCE POINT ******************************
 
-<span class="w">    </span><span class="n">NewPt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">HybridShapeFactory</span><span class="p">.</span><span class="n">AddNewPointOnCurveFromPercent</span><span class="p">(</span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">CreateReferenceFromObject</span><span class="p">(</span><span class="n">TempCrv</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">False</span><span class="p">)</span>
-<span class="w">    </span><span class="k">Call</span><span class="w"> </span><span class="n">TempSet</span><span class="p">.</span><span class="n">AppendHybridShape</span><span class="p">(</span><span class="n">NewPt</span><span class="p">)</span>
-<span class="w">    </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">UpdateObject</span><span class="p">(</span><span class="n">NewPt</span><span class="p">)</span>
-<span class="w">    </span><span class="n">NewLine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">HybridShapeFactory</span><span class="p">.</span><span class="n">AddNewLineTangency</span><span class="p">(</span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">CreateReferenceFromObject</span><span class="p">(</span><span class="n">TempCrv</span><span class="p">),</span><span class="w"> </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">CreateReferenceFromObject</span><span class="p">(</span><span class="n">NewPt</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="k">False</span><span class="p">)</span>
-<span class="w">    </span><span class="n">TempSet</span><span class="p">.</span><span class="n">AppendHybridShape</span><span class="p">(</span><span class="n">NewLine</span><span class="p">)</span>
-<span class="w">    </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">UpdateObject</span><span class="p">(</span><span class="n">NewLine</span><span class="p">)</span>
+    NewPt = CurrentPart.HybridShapeFactory.AddNewPointOnCurveFromPercent(CurrentPart.CreateReferenceFromObject(TempCrv), 0, False)
+    Call TempSet.AppendHybridShape(NewPt)
+    CurrentPart.UpdateObject(NewPt)
+    NewLine = CurrentPart.HybridShapeFactory.AddNewLineTangency(CurrentPart.CreateReferenceFromObject(TempCrv), CurrentPart.CreateReferenceFromObject(NewPt), 0, 1000, False)
+    TempSet.AppendHybridShape(NewLine)
+    CurrentPart.UpdateObject(NewLine)
 
-<span class="w">    </span><span class="c">&#39;SPA = catia.ActiveDocument.GetWorkbench(&quot;SPAWorkbench&quot;)</span>
-<span class="w">    </span><span class="c">&#39;PtMes = SPA.GetMeasurable(CurrentPart.CreateReferenceFromObject(NewPt))</span>
-<span class="w">    </span><span class="c">&#39;LineMes = SPA.GetMeasurable(CurrentPart.CreateReferenceFromObject(NewLine))</span>
+    &#39;SPA = catia.ActiveDocument.GetWorkbench(&quot;SPAWorkbench&quot;)
+    &#39;PtMes = SPA.GetMeasurable(CurrentPart.CreateReferenceFromObject(NewPt))
+    &#39;LineMes = SPA.GetMeasurable(CurrentPart.CreateReferenceFromObject(NewLine))
 
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">oMeasurableService</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="n">MeasurableService</span>
-<span class="w">    </span><span class="n">oMeasurableService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveEditor</span><span class="p">.</span><span class="n">GetService</span><span class="p">(</span><span class="s">&quot;MeasurableService&quot;</span><span class="p">)</span>
+    Dim oMeasurableService As MeasurableService
+    oMeasurableService = catia.ActiveEditor.GetService(&quot;MeasurableService&quot;)
 
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">PtMes</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="n">MeasurablePoint</span>
-<span class="w">    </span><span class="n">PtMes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oMeasurableService</span><span class="p">.</span><span class="n">GetMeasurable</span><span class="p">(</span><span class="n">NewPt</span><span class="p">,</span><span class="w"> </span><span class="n">CATMeasurableType</span><span class="p">.</span><span class="n">CAAMeasurablePoint</span><span class="p">)</span>
+    Dim PtMes As MeasurablePoint
+    PtMes = oMeasurableService.GetMeasurable(NewPt, CATMeasurableType.CAAMeasurablePoint)
 
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">LineMes</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="n">MeasurableLine</span>
-<span class="w">    </span><span class="n">LineMes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oMeasurableService</span><span class="p">.</span><span class="n">GetMeasurable</span><span class="p">(</span><span class="n">NewLine</span><span class="p">,</span><span class="w"> </span><span class="n">CATMeasurableType</span><span class="p">.</span><span class="n">CAAMeasurableLine</span><span class="p">)</span>
+    Dim LineMes As MeasurableLine
+    LineMes = oMeasurableService.GetMeasurable(NewLine, CATMeasurableType.CAAMeasurableLine)
 
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">Direction</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">UpVector</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="w">    </span><span class="n">UpVector</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="n">UpVector</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="n">UpVector</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+    Dim Direction(2), UpVector(2)
+    UpVector(0) = 0
+    UpVector(1) = 0
+    UpVector(2) = 1
 
-<span class="w">    </span><span class="c">&#39;***************************  DETECT CURVE ******************************</span>
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">Coordinates</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    &#39;***************************  DETECT CURVE ******************************
+    Dim Coordinates(2)
 
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">OffsetValue</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">Double</span>
-<span class="w">    </span><span class="n">OffsetValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+    Dim OffsetValue As Double
+    OffsetValue = 1
 
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">Steps</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">Double</span>
-<span class="w">    </span><span class="n">Steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+    Dim Steps As Double
+    Steps = 10
 
-<span class="w">    </span><span class="k">For</span><span class="w"> </span><span class="n">LoopNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">To</span><span class="w"> </span><span class="k">CInt</span><span class="p">(</span><span class="n">Steps</span><span class="p">)</span>
+    For LoopNum = 1 To CInt(Steps)
 
-<span class="w">        </span><span class="c">&#39;ParamSelected.Value = CDbl(0) + LoopNum * (1 / 30)</span>
-<span class="w">        </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">Update</span><span class="p">()</span>
+        &#39;ParamSelected.Value = CDbl(0) + LoopNum * (1 / 30)
+        CurrentPart.Update()
 
-<span class="w">        </span><span class="n">NewPt</span><span class="p">.</span><span class="n">Ratio</span><span class="p">.</span><span class="n">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoopNum</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0</span><span class="p">#</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">CInt</span><span class="p">(</span><span class="n">Steps</span><span class="p">))</span>
-<span class="w">        </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">UpdateObject</span><span class="p">(</span><span class="n">NewPt</span><span class="p">)</span>
-<span class="w">        </span><span class="n">CurrentPart</span><span class="p">.</span><span class="n">UpdateObject</span><span class="p">(</span><span class="n">NewLine</span><span class="p">)</span>
-<span class="w">        </span><span class="n">PtMes</span><span class="p">.</span><span class="n">GetPoint</span><span class="p">(</span><span class="n">Coordinates</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">Coordinates</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">Coordinates</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="w">        </span><span class="n">LineMes</span><span class="p">.</span><span class="n">GetDirection</span><span class="p">(</span><span class="n">Direction</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">Direction</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">Direction</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        NewPt.Ratio.Value = LoopNum * (1.0# / CInt(Steps))
+        CurrentPart.UpdateObject(NewPt)
+        CurrentPart.UpdateObject(NewLine)
+        PtMes.GetPoint(Coordinates(0), Coordinates(1), Coordinates(2))
+        LineMes.GetDirection(Direction(0), Direction(1), Direction(2))
 
-<span class="w">        </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveWindow</span><span class="p">.</span><span class="n">ActiveViewer</span><span class="p">.</span><span class="n">Viewpoint3D</span><span class="p">.</span><span class="n">PutOrigin</span><span class="p">(</span><span class="n">Coordinates</span><span class="p">)</span>
-<span class="w">        </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveWindow</span><span class="p">.</span><span class="n">ActiveViewer</span><span class="p">.</span><span class="n">Viewpoint3D</span><span class="p">.</span><span class="n">PutSightDirection</span><span class="p">(</span><span class="n">Direction</span><span class="p">)</span>
-<span class="w">        </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveWindow</span><span class="p">.</span><span class="n">ActiveViewer</span><span class="p">.</span><span class="n">Viewpoint3D</span><span class="p">.</span><span class="n">PutUpDirection</span><span class="p">(</span><span class="n">UpVector</span><span class="p">)</span>
-<span class="w">        </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveWindow</span><span class="p">.</span><span class="n">ActiveViewer</span><span class="p">.</span><span class="n">Update</span><span class="p">()</span>
+        catia.ActiveWindow.ActiveViewer.Viewpoint3D.PutOrigin(Coordinates)
+        catia.ActiveWindow.ActiveViewer.Viewpoint3D.PutSightDirection(Direction)
+        catia.ActiveWindow.ActiveViewer.Viewpoint3D.PutUpDirection(UpVector)
+        catia.ActiveWindow.ActiveViewer.Update()
 
-<span class="w">        </span><span class="n">catia</span><span class="p">.</span><span class="n">ActiveWindow</span><span class="p">.</span><span class="n">ActiveViewer</span><span class="p">.</span><span class="n">CaptureToFile</span><span class="p">(</span><span class="n">INFITF</span><span class="p">.</span><span class="n">CatCaptureFormat</span><span class="p">.</span><span class="n">catCaptureFormatJPEG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C:\Temp\img&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s">&quot;\MyImage&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LoopNum</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s">&quot;.jpg&quot;</span><span class="p">)</span>
+        catia.ActiveWindow.ActiveViewer.CaptureToFile(INFITF.CatCaptureFormat.catCaptureFormatJPEG, &quot;C:\Temp\img&quot; &amp; &quot;\MyImage&quot; &amp; LoopNum &amp; &quot;.jpg&quot;)
 
-<span class="w">    </span><span class="k">Next</span>
-<span class="w">    </span><span class="c">&#39;MsgBox (&quot;Generated Frames&quot;)</span>
-<span class="k">End</span><span class="w"> </span><span class="k">Sub</span>
-<span class="k">Function</span><span class="w"> </span><span class="nf">ContainingPart</span><span class="p">(</span><span class="k">ByVal</span><span class="w"> </span><span class="n">CatObject</span><span class="p">)</span>
-<span class="w">    </span><span class="k">Dim</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">Boolean</span>
-<span class="w">    </span><span class="n">Current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CatObject</span>
-<span class="w">    </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span>
-<span class="w">    </span><span class="k">Do</span><span class="w"> </span><span class="k">While</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span>
-<span class="w">        </span><span class="n">Current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Current</span><span class="p">.</span><span class="n">Parent</span>
-<span class="w">        </span><span class="k">If</span><span class="w"> </span><span class="n">TypeName</span><span class="p">(</span><span class="n">Current</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Part&quot;</span><span class="w"> </span><span class="k">Then</span>
-<span class="w">            </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span>
-<span class="w">        </span><span class="k">End</span><span class="w"> </span><span class="k">If</span>
-<span class="w">    </span><span class="k">Loop</span>
-<span class="w">    </span><span class="n">ContainingPart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Current</span>
-<span class="k">End</span><span class="w"> </span><span class="k">Function</span>
+    Next
+    &#39;MsgBox (&quot;Generated Frames&quot;)
+End Sub
+Function ContainingPart(ByVal CatObject)
+    Dim found As Boolean
+    Current = CatObject
+    found = False
+    Do While found = False
+        Current = Current.Parent
+        If TypeName(Current) = &quot;Part&quot; Then
+            found = True
+        End If
+    Loop
+    ContainingPart = Current
+End Function
 
-<span class="k">End</span><span class="w"> </span><span class="k">Module</span>
+End Module
 </code></pre></div>
 </div>
 </div>
