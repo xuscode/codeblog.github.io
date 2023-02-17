@@ -7213,17 +7213,23 @@
 
 
 
-<p>Sub GetCatia()
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">VB</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code>Sub GetCatia()
     On Error Resume Next
-    '如果CATIA启动，用GetObject连接到CATIA
-    Set CATIA = GetObject(, "CATIA.Application")
-    '如果CATIA没有运行，则先用Create Object启动CATIA
+    &#39;如果CATIA启动，用GetObject连接到CATIA
+    Set CATIA = GetObject(, &quot;CATIA.Application&quot;)
+    &#39;如果CATIA没有运行，则先用Create Object启动CATIA
     If Err.Number &lt;&gt; 0 Then
-      Set CATIA = CreateObject("CATIA.Application")
+      Set CATIA = CreateObject(&quot;CATIA.Application&quot;)
       CATIA.Visible = True
     End If
     On Error GoTo 0
-End Sub</p>
+End Sub
+</code></pre></div>
 
 
 
